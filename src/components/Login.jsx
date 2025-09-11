@@ -4,6 +4,7 @@ import { BASE_URL } from "../utils/constant";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [email, setEmail] = useState("lisbon@gmail.com");
@@ -22,10 +23,13 @@ const Login = () => {
         },
         { withCredentials: true }
       );
+
       dispatch(addUser(res.data));
-      return navigate("/feed");
+      toast("Login Successful!!!", { type: "success" });
+      navigate("/feed");
     } catch (error) {
-      console.error(error.message);
+      toast(error?.response?.data, { type: "error" });
+      console.error(error);
     }
   };
 
