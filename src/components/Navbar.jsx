@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { removeUser } from "../utils/userSlice";
 import { BASE_URL } from "../utils/constant";
 import { toast } from "react-toastify";
+import { removeUserFeed } from "../utils/feedSlice";
 
 const Navbar = () => {
   const user = useSelector((store) => store.user);
@@ -19,6 +20,7 @@ const Navbar = () => {
         { withCredentials: true }
       );
       dispatch(removeUser());
+      dispatch(removeUserFeed());
       toast(res?.data, { type: "success" });
       navigate("/login");
     } catch (error) {
@@ -49,7 +51,7 @@ const Navbar = () => {
                 className="btn btn-ghost btn-circle avatar"
               >
                 <div className="w-10 rounded-full border-2">
-                  <img alt="User profile" src={user?.photoUrl} />
+                  <img alt="User profile" src={user?.photos[0]} />
                 </div>
               </div>
 
