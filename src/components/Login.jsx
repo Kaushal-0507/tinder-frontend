@@ -5,122 +5,159 @@ import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { LuEyeClosed } from "react-icons/lu";
+import { LuEye } from "react-icons/lu";
 
 const Login = () => {
   const [email, setEmail] = useState("lisbon@gmail.com");
   const [password, setPassword] = useState("Lisbon@123");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [isLogin, setIsLogin] = useState(true);
+  const [isPwdVisible, setIsPwdVisible] = useState(false);
+
+  const toggleLoginPage = () => {
+    setIsLogin(!isLogin);
+  };
+
+  const togglePassword = () => {
+    setIsPwdVisible(!isPwdVisible);
+  };
 
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      const res = await axios.post(
-        BASE_URL + "/login",
-        {
-          email,
-          password,
-        },
-        { withCredentials: true }
-      );
 
+      const url = isLogin ? BASE_URL + "/login" : BASE_URL + "/signup";
+      const data = isLogin
+        ? {
+            email,
+            password,
+          }
+        : {
+            firstName,
+            lastName,
+            email,
+            password,
+          };
+
+      const res = await axios.post(url, data, { withCredentials: true });
+      console.log(res.data);
       dispatch(addUser(res.data));
-      toast("Login Successful!!!", { type: "success" });
+      const message = isLogin
+        ? "Login Successful!!!"
+        : "Sign Up Successful!!! ";
+      toast(message, { type: "success" });
       navigate("/feed");
     } catch (error) {
       toast(error?.response?.data, { type: "error" });
       console.error(error);
     }
   };
-
   return (
-    <div style={styles.container}>
-      <form style={styles.form} onSubmit={handleSubmit}>
-        <h2 style={styles.title}>Welcome Back</h2>
+    <div className="flex justify-center p-5">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-gray-900/80 backdrop-blur-sm p-8 rounded-lg w-full max-w-md shadow-xl border border-gray-700"
+      >
+        <h2 className={`text-gray-100 text-center mb-6 text-2xl font-semibold`}>
+          {isLogin ? "Welcome Back" : "Welcome"}
+        </h2>
 
-        <div style={styles.inputGroup}>
-          <label style={styles.label}>Email</label>
+        {!isLogin && (
+          <>
+            <div className="mb-5">
+              <label className="block text-gray-400 mb-2 text-sm font-medium">
+                First Name
+              </label>
+              <input
+                type="text"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                className="w-full px-4 py-3 rounded bg-gray-800/70 border border-gray-600 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors"
+                placeholder="Enter your first name"
+              />
+            </div>
+            <div className="mb-5">
+              <label className="block text-gray-400 mb-2 text-sm font-medium">
+                Last Name
+              </label>
+              <input
+                type="text"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                className="w-full px-4 py-3 rounded bg-gray-800/70 border border-gray-600 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors"
+                placeholder="Enter your last name"
+              />
+            </div>
+          </>
+        )}
+
+        <div className="mb-5">
+          <label className="block text-gray-400 mb-2 text-sm font-medium">
+            Email
+          </label>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            style={styles.input}
+            className="w-full px-4 py-3 rounded bg-gray-800/70 border border-gray-600 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors"
             placeholder="Enter your email"
           />
         </div>
 
-        <div style={styles.inputGroup}>
-          <label style={styles.label}>Password</label>
+        <div className="mb-6 relative">
+          <label className="block text-gray-400 mb-2 text-sm font-medium">
+            Password
+          </label>
           <input
-            type="text"
+            type={isPwdVisible ? "password" : "text"}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            style={styles.input}
+            className="w-full px-4 py-3  rounded bg-gray-800/70 border border-gray-600 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors"
             placeholder="Enter your password"
           />
+          {isPwdVisible ? (
+            <LuEyeClosed
+              color="gray"
+              size={25}
+              className="absolute top-10 right-4"
+              onClick={togglePassword}
+            />
+          ) : (
+            <LuEye
+              color="gray"
+              size={25}
+              className="absolute top-10 right-4"
+              onClick={togglePassword}
+            />
+          )}
         </div>
 
-        <button type="submit" style={styles.button} onClick={handleSubmit}>
-          Sign In
+        <button
+          type="submit"
+          className="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-3 px-4 rounded font-semibold hover:from-purple-700 hover:to-blue-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+          onClick={handleSubmit}
+        >
+          {isLogin ? "Sign In" : "Sign Up"}
         </button>
+        <div className="flex justify-between my-1">
+          <p className="text-gray-400 font-semibold">
+            {isLogin ? "Don't have an account!" : "Already account exist!"}
+          </p>
+
+          <p
+            onClick={toggleLoginPage}
+            className="font-extrabold text-emerald-700 cursor-pointer underline"
+          >
+            {isLogin ? "Sign Up" : "Login"}
+          </p>
+        </div>
       </form>
     </div>
   );
-};
-
-const styles = {
-  container: {
-    display: "flex",
-    justifyContent: "center",
-    marginTop: "40px",
-    padding: "20px",
-  },
-  form: {
-    backgroundColor: "rgba(30, 30, 40, 0.8)",
-    padding: "2rem",
-    borderRadius: "5px",
-    width: "100%",
-    maxWidth: "400px",
-    boxShadow: "0 8px 24px rgba(0, 0, 0, 0.3)",
-    border: "1px solid rgba(255, 255, 255, 0.1)",
-  },
-  title: {
-    color: "#e0e0e0",
-    textAlign: "center",
-    marginBottom: "1.5rem",
-    fontWeight: "600",
-  },
-  inputGroup: {
-    marginBottom: "1.2rem",
-  },
-  label: {
-    display: "block",
-    color: "#a0a0b0",
-    marginBottom: "0.5rem",
-    fontSize: "0.9rem",
-  },
-  input: {
-    width: "100%",
-    padding: "0.8rem",
-    borderRadius: "2px",
-    border: "1px solid rgba(255, 255, 255, 0.1)",
-    backgroundColor: "rgba(20, 20, 30, 0.7)",
-    color: "#e0e0e0",
-    fontSize: "1rem",
-    boxSizing: "border-box",
-  },
-  button: {
-    width: "100%",
-    padding: "0.8rem",
-    backgroundColor: "#6464f0",
-    color: "white",
-    border: "none",
-    borderRadius: "2px",
-    fontSize: "1rem",
-    fontWeight: "600",
-    cursor: "pointer",
-    transition: "background-color 0.2s",
-  },
 };
 
 export default Login;

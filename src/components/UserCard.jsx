@@ -1,4 +1,5 @@
 import React from "react";
+import { DEFAULT_USER_IMG } from "../utils/constant";
 
 const UserCard = ({ user }) => {
   const { firstName, lastName, age, about, hobbies, photoUrl, photos } = user;
@@ -7,7 +8,7 @@ const UserCard = ({ user }) => {
       {/* User Photo */}
       <div className="relative h-[500px] overflow-hidden">
         <img
-          src={photos?.[0] || photoUrl}
+          src={photos?.[0] || photoUrl || DEFAULT_USER_IMG}
           alt={firstName}
           className="w-full h-full object-cover"
         />

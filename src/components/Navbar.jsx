@@ -3,7 +3,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { removeUser } from "../utils/userSlice";
-import { BASE_URL } from "../utils/constant";
+import { BASE_URL, DEFAULT_USER_IMG } from "../utils/constant";
 import { toast } from "react-toastify";
 import { removeUserFeed } from "../utils/feedSlice";
 
@@ -27,6 +27,7 @@ const Navbar = () => {
       console.error(error.message);
     }
   };
+
   return (
     <>
       <div className="navbar bg-base-200 shadow-sm px-4">
@@ -51,7 +52,14 @@ const Navbar = () => {
                 className="btn btn-ghost btn-circle avatar"
               >
                 <div className="w-10 rounded-full border-2">
-                  <img alt="User profile" src={user?.photos[0]} />
+                  <img
+                    alt="User profile"
+                    src={
+                      user?.photos.length > 0
+                        ? user.photos[0]
+                        : DEFAULT_USER_IMG
+                    }
+                  />
                 </div>
               </div>
 
