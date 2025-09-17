@@ -50,7 +50,7 @@ const Login = () => {
         ? "Login Successful!!!"
         : "Sign Up Successful!!! ";
       toast(message, { type: "success" });
-      navigate("/feed");
+      isLogin ? navigate("/") : navigate("/profile");
     } catch (error) {
       toast(error?.response?.data, { type: "error" });
       console.error(error);

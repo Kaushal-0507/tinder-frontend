@@ -25,10 +25,10 @@ const Dashboard = ({ user }) => {
       withCredentials: true,
     });
     dispatch(addUserRequest(res?.data?.data));
-    dispatch(showConnection(false));
   };
   useEffect(() => {
     getUserConnections();
+    getUserRequests();
   }, []);
   return (
     <div className="w-4/12 border-r-1 border-white/10">
@@ -46,7 +46,10 @@ const Dashboard = ({ user }) => {
         <div>
           {" "}
           <p
-            onClick={() => dispatch(showConnection(true))}
+            onClick={() => {
+              dispatch(showConnection(true));
+              getUserConnections();
+            }}
             className="font-semibold hover:text-emerald-700 cursor-pointer"
           >
             Connections
@@ -57,7 +60,10 @@ const Dashboard = ({ user }) => {
         </div>
         <div>
           <p
-            onClick={getUserRequests}
+            onClick={() => {
+              dispatch(showConnection(false));
+              getUserRequests();
+            }}
             className="font-semibold hover:text-emerald-700 cursor-pointer"
           >
             Requests
@@ -89,6 +95,7 @@ const Dashboard = ({ user }) => {
                 <ConnectionReqCard
                   key={request?._id}
                   user={request?.fromUserId}
+                  id={request?._id}
                 />
               ))}
             </div>

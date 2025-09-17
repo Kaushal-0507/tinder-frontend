@@ -37,7 +37,7 @@ const Navbar = () => {
             
           </a> */}
           <Link
-            to="/feed"
+            to="/"
             className="text-2xl font-bold text-emerald-700 cursor-pointer"
           >
             stumble.
