@@ -1,8 +1,13 @@
 import React, { useState, useEffect, useCallback } from "react";
 
-const ImageCarousel = ({ photos, autoPlay = true, interval = 3000 }) => {
+const ImageCarousel = ({
+  photos: originalPhotos,
+  autoPlay = true,
+  interval = 3000,
+}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(autoPlay);
+  const photos = originalPhotos?.filter((photo) => photo !== null) || [];
 
   // Handle next/previous navigation
   const goToNext = useCallback(() => {

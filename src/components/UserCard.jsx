@@ -23,11 +23,20 @@ const UserCard = ({ user }) => {
     <div className="w-88 max-h-[500px] bg-gray-900 rounded-2xl overflow-hidden shadow-xl relative border border-gray-700 mx-auto my-4">
       {/* User Photo */}
       <div className="relative h-[500px] overflow-hidden">
-        <ImageCarousel
-          photos={photos || DEFAULT_USER_IMG}
-          autoPlay={true}
-          interval={4000} // 4 seconds between slides
-        />
+        {photos.length > 0 ? (
+          <ImageCarousel
+            photos={photos}
+            autoPlay={true}
+            interval={4000} // 4 seconds between slides
+          />
+        ) : (
+          <img
+            className="w-full h-[500px]"
+            src={DEFAULT_USER_IMG}
+            alt="default-user-img"
+            srcset=""
+          />
+        )}
         {/* Gradient Overlay */}
         <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-gray-900 to-transparent"></div>
       </div>
