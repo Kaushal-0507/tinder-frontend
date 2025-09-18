@@ -1,8 +1,23 @@
 import React from "react";
-import { DEFAULT_USER_IMG } from "../utils/constant";
+import { BASE_URL, DEFAULT_USER_IMG } from "../utils/constant";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { removeUserFeed } from "../utils/feedSlice";
 
 const UserCard = ({ user }) => {
-  const { firstName, lastName, age, about, hobbies, photoUrl, photos } = user;
+  if (!user) return;
+  const { _id, firstName, lastName, age, about, hobbies, photoUrl, photos } =
+    user;
+  console.log(_id);
+  const dispatch = useDispatch();
+  const sendRequest = async (status, _id) => {
+    const res = await axios.post(
+      BASE_URL + "/request/send/" + status + "/" + _id,
+      {},
+      { withCredentials: true }
+    );
+    dispatch(removeUserFeed(_id));
+  };
   return (
     <div className="w-88 max-h-[500px] bg-gray-900 rounded-2xl overflow-hidden shadow-xl relative border border-gray-700 mx-auto my-4">
       {/* User Photo */}
@@ -44,14 +59,20 @@ const UserCard = ({ user }) => {
         </button>
 
         {/* Ignore (X) Button */}
-        <button className="w-14 h-14 cursor-pointer rounded-full bg-gray-800 shadow-md flex items-center justify-center text-red-400 hover:bg-gray-700 transition-colors border border-gray-700">
+        <button
+          onClick={() => sendRequest("ignored", _id)}
+          className="w-14 h-14 cursor-pointer rounded-full bg-gray-800 shadow-md flex items-center justify-center text-red-400 hover:bg-gray-700 transition-colors border border-gray-700"
+        >
           <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
             <path d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z" />
           </svg>
         </button>
 
         {/* Like (Heart) Button */}
-        <button className="w-14 h-14 cursor-pointer rounded-full bg-gray-800 shadow-md flex items-center justify-center text-pink-600 hover:bg-gray-700 transition-colors border border-gray-700">
+        <button
+          onClick={() => sendRequest("interested", _id)}
+          className="w-14 h-14 cursor-pointer rounded-full bg-gray-800 shadow-md flex items-center justify-center text-pink-600 hover:bg-gray-700 transition-colors border border-gray-700"
+        >
           <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 21.35L10.55 20.03C5.4 15.36 2 12.28 2 8.5C2 5.42 4.42 3 7.5 3C9.24 3 10.91 3.81 12 5.09C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.42 22 8.5C22 12.28 18.6 15.36 13.45 20.04L12 21.35Z" />
           </svg>

@@ -13,7 +13,6 @@ const Feed = () => {
   const dispatch = useDispatch();
   const getUserFeed = async () => {
     try {
-      if (feed) return;
       const res = await axios.get(BASE_URL + "/user/feed", {
         withCredentials: true,
       });
@@ -26,10 +25,18 @@ const Feed = () => {
   useEffect(() => {
     getUserFeed();
   }, []);
+  if (!feed) return;
+
   return (
-    <div className="flex ">
+    <div className="flex h-full">
       <Dashboard user={user} />
-      <div className="flex-1"> {feed && <UserCard user={feed[1]} />} </div>
+      {feed.length <= 0 ? (
+        <div className="text-2xl  text-emerald-700 font-bold m-auto">
+          No New User
+        </div>
+      ) : (
+        <div className="flex-1"> {feed && <UserCard user={feed[0]} />} </div>
+      )}
     </div>
   );
 };
