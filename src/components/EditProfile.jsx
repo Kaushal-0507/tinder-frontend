@@ -1,15 +1,17 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { BASE_URL } from "../utils/constant";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { addUser } from "../utils/userSlice";
 import UserCard from "./UserCard";
+import { uploadToCloudinary } from "../utils/cloudinaryUpload"; // Import the Cloudinary upload function
+import { BASE_URL } from "../utils/constant";
 
 const EditProfile = () => {
   const userData = useSelector((store) => store.user);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [uploadingIndex, setUploadingIndex] = useState(null); // Track which image is uploading
   const dispatch = useDispatch();
 
   // Get existing photos from Redux store or empty array
@@ -35,32 +37,6 @@ const EditProfile = () => {
     userData?.hobbies?.join(", ") || ""
   );
 
-  // Compress image function
-  const compressImage = (base64Image, maxWidth = 800, quality = 0.7) => {
-    return new Promise((resolve) => {
-      const img = new Image();
-      img.src = base64Image;
-      img.onload = () => {
-        const canvas = document.createElement("canvas");
-        let width = img.width;
-        let height = img.height;
-
-        if (width > maxWidth) {
-          height = (height * maxWidth) / width;
-          width = maxWidth;
-        }
-
-        canvas.width = width;
-        canvas.height = height;
-
-        const ctx = canvas.getContext("2d");
-        ctx.drawImage(img, 0, 0, width, height);
-
-        resolve(canvas.toDataURL("image/jpeg", quality));
-      };
-    });
-  };
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setProfile((prev) => ({
@@ -84,27 +60,36 @@ const EditProfile = () => {
 
   const handlePhotoUpload = async (index, e) => {
     const file = e.target.files[0];
-    if (file) {
-      // Check file size (max 2MB)
-      if (file.size > 2 * 1024 * 1024) {
-        setError("Image is too large. Please select an image under 2MB.");
-        return;
-      }
+    if (!file) return;
 
-      const reader = new FileReader();
-      reader.onload = async (e) => {
-        try {
-          // Compress the image
-          const compressedImage = await compressImage(e.target.result);
-          const newPhotos = [...photos];
-          newPhotos[index] = compressedImage;
-          setPhotos(newPhotos);
-        } catch (error) {
-          console.error("Error compressing image:", error);
-          setError("Failed to process image");
-        }
-      };
-      reader.readAsDataURL(file);
+    // Check file size (max 10MB - Cloudinary can handle but good to limit)
+    if (file.size > 10 * 1024 * 1024) {
+      setError("Image is too large. Please select an image under 10MB.");
+      return;
+    }
+
+    // Check if file is an image
+    if (!file.type.startsWith("image/")) {
+      setError("Please select a valid image file (JPEG, PNG, etc.)");
+      return;
+    }
+
+    setUploadingIndex(index);
+    setError("");
+
+    try {
+      // Upload to Cloudinary with signed approach
+      const cloudinaryUrl = await uploadToCloudinary(file);
+
+      // Update photos state with Cloudinary URL
+      const newPhotos = [...photos];
+      newPhotos[index] = cloudinaryUrl;
+      setPhotos(newPhotos);
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      setError(error.message || "Failed to upload image. Please try again.");
+    } finally {
+      setUploadingIndex(null);
     }
   };
 
@@ -146,7 +131,7 @@ const EditProfile = () => {
       });
 
       const response = await axios.patch(
-        `${BASE_URL}/profile/edit`,
+        BASE_URL + "/profile/edit",
         requestData,
         {
           headers: {
@@ -156,14 +141,13 @@ const EditProfile = () => {
         }
       );
 
-      console.log("Profile updated successfully:", response.data);
       toast("Profile updated successfully", {
         type: "success",
       });
       dispatch(addUser(response.data?.data));
     } catch (error) {
       console.error("Error updating profile:", error);
-      toast(error?.response?.data, {
+      toast(error?.response?.data?.message || "Error updating profile", {
         type: "error",
       });
     } finally {
@@ -183,9 +167,9 @@ const EditProfile = () => {
         )}
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Photo Upload Section with size warning */}
+          {/* Photo Upload Section with updated size warning */}
           <div>
-            <p className="text-sm text-gray-400 mb-2">Max 2MB per image</p>
+            <p className="text-sm text-gray-400 mb-2">Max 10MB per image</p>
             <div className="grid grid-cols-3 gap-4 md:grid-cols-5">
               {photos.map((photo, index) => (
                 <div key={index} className="relative group">
@@ -194,7 +178,12 @@ const EditProfile = () => {
                     className="block cursor-pointer"
                   >
                     <div className="w-full h-32 bg-gray-800 rounded-lg flex items-center justify-center border border-dashed border-gray-600 hover:border-gray-400 transition-colors relative">
-                      {photo ? (
+                      {uploadingIndex === index ? (
+                        <div className="flex flex-col items-center">
+                          <div className="w-8 h-8 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mb-2"></div>
+                          <span className="text-xs">Uploading...</span>
+                        </div>
+                      ) : photo ? (
                         <>
                           <img
                             src={photo}
@@ -248,6 +237,7 @@ const EditProfile = () => {
                     accept="image/*"
                     className="hidden"
                     onChange={(e) => handlePhotoUpload(index, e)}
+                    disabled={uploadingIndex !== null}
                   />
                 </div>
               ))}
@@ -368,9 +358,10 @@ const EditProfile = () => {
           <div className="flex justify-end">
             <button
               type="submit"
-              className="bg-gradient-to-r cursor-pointer from-purple-600 to-pink-600 text-white font-medium py-2 px-6 rounded-full hover:from-purple-700 hover:to-pink-700 transition-colors"
+              disabled={isLoading || uploadingIndex !== null}
+              className="bg-gradient-to-r cursor-pointer from-purple-600 to-pink-600 text-white font-medium py-2 px-6 rounded-full hover:from-purple-700 hover:to-pink-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Save Changes
+              {isLoading ? "Saving..." : "Save Changes"}
             </button>
           </div>
         </form>

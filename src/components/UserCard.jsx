@@ -3,12 +3,13 @@ import { BASE_URL, DEFAULT_USER_IMG } from "../utils/constant";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { removeUserFeed } from "../utils/feedSlice";
+import ImageCarousel from "./ImageCarousel";
 
 const UserCard = ({ user }) => {
   if (!user) return;
   const { _id, firstName, lastName, age, about, hobbies, photoUrl, photos } =
     user;
-  console.log(_id);
+
   const dispatch = useDispatch();
   const sendRequest = async (status, _id) => {
     const res = await axios.post(
@@ -22,10 +23,10 @@ const UserCard = ({ user }) => {
     <div className="w-88 max-h-[500px] bg-gray-900 rounded-2xl overflow-hidden shadow-xl relative border border-gray-700 mx-auto my-4">
       {/* User Photo */}
       <div className="relative h-[500px] overflow-hidden">
-        <img
-          src={photos?.[0] || photoUrl || DEFAULT_USER_IMG}
-          alt={firstName}
-          className="w-full h-full object-cover"
+        <ImageCarousel
+          photos={photos || DEFAULT_USER_IMG}
+          autoPlay={true}
+          interval={4000} // 4 seconds between slides
         />
         {/* Gradient Overlay */}
         <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-gray-900 to-transparent"></div>

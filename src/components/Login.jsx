@@ -44,7 +44,7 @@ const Login = () => {
           };
 
       const res = await axios.post(url, data, { withCredentials: true });
-      console.log(res.data);
+
       dispatch(addUser(res.data));
       const message = isLogin
         ? "Login Successful!!!"
