@@ -6,6 +6,7 @@ import { addUser } from "../utils/userSlice";
 import UserCard from "./UserCard";
 import { uploadToCloudinary } from "../utils/cloudinaryUpload"; // Import the Cloudinary upload function
 import { BASE_URL } from "../utils/constant";
+import { Link } from "react-router-dom";
 
 const EditProfile = () => {
   const userData = useSelector((store) => store.user);
@@ -355,7 +356,7 @@ const EditProfile = () => {
           </div>
 
           {/* Submit Button */}
-          <div className="flex justify-end">
+          <div className="flex gap-2 justify-end">
             <button
               type="submit"
               disabled={isLoading || uploadingIndex !== null}
@@ -363,6 +364,17 @@ const EditProfile = () => {
             >
               {isLoading ? "Saving..." : "Save Changes"}
             </button>
+            <Link to="/">
+              {!isLoading && userData?.age && (
+                <button
+                  type="submit"
+                  disabled={isLoading || uploadingIndex !== null}
+                  className="bg-gradient-to-r cursor-pointer from-purple-600 to-pink-600 text-white font-medium py-2 px-6 rounded-full hover:from-purple-700 hover:to-pink-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  Home
+                </button>
+              )}
+            </Link>
           </div>
         </form>
       </div>
