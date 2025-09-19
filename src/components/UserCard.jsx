@@ -7,7 +7,7 @@ import ImageCarousel from "./ImageCarousel";
 
 const UserCard = ({ user }) => {
   if (!user) return;
-  const { _id, firstName, lastName, age, about, hobbies, photoUrl, photos } =
+  const { _id, firstName, lastName, age, about, hobbies, photos, gender } =
     user;
 
   const dispatch = useDispatch();
@@ -20,18 +20,19 @@ const UserCard = ({ user }) => {
     dispatch(removeUserFeed(_id));
   };
   return (
-    <div className="w-88 max-h-[500px] bg-gray-900 rounded-2xl overflow-hidden shadow-xl relative border border-gray-700 mx-auto my-4">
+    <div className="lg:w-88 w-[94%] lg:max-h-[500px] h-[95%] bg-gray-900 rounded-2xl overflow-hidden shadow-xl relative border border-gray-700 mx-auto lg:my-4 my-2">
       {/* User Photo */}
-      <div className="relative h-[500px] overflow-hidden">
+      <div className="relative lg:max-h-[500px] h-[95%] overflow-hidden mx-auto">
         {photos.length > 0 ? (
           <ImageCarousel
             photos={photos}
             autoPlay={true}
             interval={4000} // 4 seconds between slides
+            userId={_id}
           />
         ) : (
           <img
-            className="w-full h-[500px]"
+            className="w-full h-full"
             src={DEFAULT_USER_IMG}
             alt="default-user-img"
             srcset=""

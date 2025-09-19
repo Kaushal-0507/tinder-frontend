@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addConnections, showConnection } from "../utils/connectionSlice";
 import ConnectionReqCard from "./ConnectionReqCard";
 import { addUserRequest } from "../utils/requestSlice";
+import { Link } from "react-router-dom";
 
 const Dashboard = ({ user }) => {
   const { connections, isConnection } = useSelector(
@@ -31,7 +32,7 @@ const Dashboard = ({ user }) => {
     getUserRequests();
   }, []);
   return (
-    <div className="w-4/12 border-r-1 border-white/10">
+    <div className="w-full ">
       <div className="p-4 flex items-center gap-4 bg-emerald-700 border-b-1 border-white/10">
         <img
           className="w-10 h-10 object-cover rounded-full border-2"
@@ -78,7 +79,12 @@ const Dashboard = ({ user }) => {
           {connections && connections.length > 0 ? (
             <div className="rounded-[10px]">
               {connections.map((connection) => (
-                <ConnectionReqCard key={connection?._id} user={connection} />
+                <Link
+                  key={connection?._id}
+                  to={`/user/profile/${connection?._id}`}
+                >
+                  <ConnectionReqCard key={connection?._id} user={connection} />
+                </Link>
               ))}
             </div>
           ) : (
@@ -92,11 +98,16 @@ const Dashboard = ({ user }) => {
           {requests && requests.length > 0 ? (
             <div className="rounded-[10px]">
               {requests.map((request) => (
-                <ConnectionReqCard
+                <Link
                   key={request?._id}
-                  user={request?.fromUserId}
-                  id={request?._id}
-                />
+                  to={`/user/profile/${request?.fromUserId?._id}`}
+                >
+                  <ConnectionReqCard
+                    key={request?._id}
+                    user={request?.fromUserId}
+                    id={request?._id}
+                  />
+                </Link>
               ))}
             </div>
           ) : (

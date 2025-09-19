@@ -1,11 +1,13 @@
 import axios from "axios";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { removeUser } from "../utils/userSlice";
 import { BASE_URL, DEFAULT_USER_IMG } from "../utils/constant";
 import { toast } from "react-toastify";
 import { removeUserFeed } from "../utils/feedSlice";
+import { FaAngleDoubleLeft } from "react-icons/fa";
+import { toggleDashboard } from "../utils/toggleSlice";
 
 const Navbar = () => {
   const user = useSelector((store) => store.user);
@@ -79,6 +81,13 @@ const Navbar = () => {
                   <a>Logout </a>
                 </li>
               </ul>
+            </div>
+
+            <div
+              className="m-auto lg:hidden block"
+              onClick={() => dispatch(toggleDashboard())}
+            >
+              <FaAngleDoubleLeft size={20} />
             </div>
           </div>
         )}

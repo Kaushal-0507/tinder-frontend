@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { Link } from "react-router-dom";
 
 const ImageCarousel = ({
   photos: originalPhotos,
   autoPlay = true,
   interval = 3000,
+  userId,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(autoPlay);
@@ -34,12 +36,14 @@ const ImageCarousel = ({
     <div className="relative w-full max-w-md mx-auto h-full bg-black rounded-lg overflow-hidden shadow-xl">
       {/* Main Image */}
       <div className="relative w-full h-full">
-        <img
-          src={photos[currentIndex]}
-          alt={`Profile ${currentIndex + 1}`}
-          className="w-full h-full object-cover"
-          loading="lazy"
-        />
+        <Link to={`/user/profile/${userId}`}>
+          <img
+            src={photos[currentIndex]}
+            alt={`Profile ${currentIndex + 1}`}
+            className="w-full h-full object-cover"
+            loading="lazy"
+          />
+        </Link>
 
         {photos.length > 1 && (
           <div className="absolute top-2 left-4 right-4 flex gap-1 z-10">
