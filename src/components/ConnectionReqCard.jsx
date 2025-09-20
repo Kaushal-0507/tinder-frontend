@@ -28,6 +28,7 @@ const ConnectionReqCard = ({ user, id }) => {
               className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 object-cover flex-shrink-0"
               src={user?.photos?.[0] || DEFAULT_USER_IMG}
               alt="User Img"
+              loading="lazy"
             />
 
             <div className="min-w-0 flex-1">

@@ -61,6 +61,7 @@ const Navbar = () => {
                         ? user.photos[0]
                         : DEFAULT_USER_IMG
                     }
+                    loading="lazy"
                   />
                 </div>
               </div>

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import { BASE_URL, DEFAULT_USER_IMG } from "../utils/constant";
-import ImageCarousel from "./ImageCarousel";
+const ImageCarousel = lazy(() => import("./ImageCarousel"));
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -33,15 +33,22 @@ const UserProfile = () => {
     <div className="flex flex-col lg:flex-row px-4 sm:px-6 lg:px-10 py-4 gap-4 lg:gap-6">
       {/* Left Side - Image Carousel */}
 
-      <div className="w-full lg:min-w-[320px] lg:w-auto h-64 sm:h-80 lg:h-[500px] rounded-xl overflow-hidden shadow-lg">
+      <div className="sm:w-1/2 lg:min-w-[320px] sm:mx-auto lg:w-auto h-120 sm:h-120 lg:h-[500px] rounded-xl overflow-hidden shadow-lg">
         {validPhotos.length > 0 ? (
-          <ImageCarousel photos={validPhotos} autoPlay={true} interval={4000} />
+          <Suspense fallback={<div>Loading gallery...</div>}>
+            <ImageCarousel
+              photos={validPhotos}
+              autoPlay={true}
+              interval={4000}
+            />
+          </Suspense>
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gray-800">
             <img
               className="w-full h-full object-cover"
               src={DEFAULT_USER_IMG}
               alt="default-user"
+              loading="lazy"
             />
           </div>
         )}
@@ -56,7 +63,9 @@ const UserProfile = () => {
             {firstName} {lastName}
           </h1>
           <div className="flex items-center gap-3 sm:gap-4 mt-2">
-            <span className="text-lg sm:text-xl text-gray-300">{age} years</span>
+            <span className="text-lg sm:text-xl text-gray-300">
+              {age} years
+            </span>
             <span className="text-xs sm:text-sm bg-purple-600 px-2 sm:px-3 py-1 rounded-full capitalize">
               {gender || "Not specified"}
             </span>

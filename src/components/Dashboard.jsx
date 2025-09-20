@@ -38,6 +38,7 @@ const Dashboard = ({ user }) => {
           className="w-8 h-8 sm:w-10 sm:h-10 object-cover rounded-full border-2"
           src={user?.photos[0] || DEFAULT_USER_IMG}
           alt="User Img"
+          loading="lazy"
         />
         <p className="font-semibold text-sm sm:text-[18px]">
           {user?.firstName} {user?.lastName}
