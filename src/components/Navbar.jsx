@@ -32,7 +32,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="navbar bg-base-200 shadow-sm px-4">
+      <div className="navbar bg-base-200 shadow-sm px-2 sm:px-4">
         <div className="flex-1">
           {/* <a className="text-xl font-semibold text-gray-300">
             meet<span className="text-emerald-700 font-bold">Devs</span>
@@ -40,20 +40,20 @@ const Navbar = () => {
           </a> */}
           <Link
             to="/"
-            className="text-2xl font-bold text-emerald-700 cursor-pointer"
+            className="text-lg sm:text-xl md:text-2xl font-bold text-emerald-700 cursor-pointer"
           >
             stumble.
           </Link>
         </div>
         {user && (
-          <div className="flex gap-2">
+          <div className="flex gap-1 sm:gap-2 items-center">
             <div className="dropdown dropdown-end">
               <div
                 tabIndex={0}
                 role="button"
                 className="btn btn-ghost btn-circle avatar"
               >
-                <div className="w-10 rounded-full border-2">
+                <div className="w-8 sm:w-10 rounded-full border-2">
                   <img
                     alt="User profile"
                     src={
@@ -67,7 +67,7 @@ const Navbar = () => {
 
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content bg-base-300 rounded-box z-1 mt-3 w-52 p-2 shadow cursor-pointer"
+                className="menu menu-sm dropdown-content bg-base-300 rounded-box z-50 mt-3 w-48 sm:w-52 p-2 shadow cursor-pointer"
               >
                 <li>
                   <Link to="/profile" className="justify-between">
@@ -84,10 +84,10 @@ const Navbar = () => {
             </div>
 
             <div
-              className="m-auto lg:hidden block"
+              className="m-auto lg:hidden block p-2 hover:bg-base-300 rounded-full cursor-pointer"
               onClick={() => dispatch(toggleDashboard())}
             >
-              <FaAngleDoubleLeft size={20} />
+              <FaAngleDoubleLeft size={18} />
             </div>
           </div>
         )}

@@ -29,23 +29,23 @@ const Feed = () => {
   if (!feed) return;
 
   return (
-    <div className="flex  relative">
+    <div className="flex relative min-h-screen">
       <div
         className={`${
           isDashboard
-            ? "block bg-gray-800 absolute min-w-[40%] top-0 bottom-0 z-40"
+            ? "block bg-gray-800 absolute w-full sm:w-3/4 md:w-2/3 lg:w-1/3 top-0 bottom-0 z-40"
             : "hidden"
-        } lg:block lg:static border-r-1 w-1/3 border-white/10`}
+        } lg:block lg:static border-r-1 lg:w-1/3 border-white/10`}
       >
         <Dashboard user={user} />
       </div>
 
       {feed.length <= 0 ? (
-        <div className="text-2xl text-emerald-700 font-bold m-auto">
+        <div className="text-xl sm:text-2xl text-emerald-700 font-bold m-auto px-4 text-center">
           No New User
         </div>
       ) : (
-        <div className="flex-1 ">{feed && <UserCard user={feed[0]} />}</div>
+        <div className="flex-1 p-2 sm:p-4">{feed && <UserCard user={feed[0]} />}</div>
       )}
     </div>
   );

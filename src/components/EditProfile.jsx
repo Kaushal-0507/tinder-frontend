@@ -157,32 +157,32 @@ const EditProfile = () => {
   };
 
   return (
-    <div className="min-h-screen text-white p-6 flex">
-      <div className="w-2xl mx-8">
-        <h1 className="text-2xl font-bold mb-6">Edit Profile</h1>
+    <div className="min-h-screen text-white p-3 sm:p-6 flex flex-col lg:flex-row gap-6">
+      <div className="w-full lg:w-2/3 xl:w-3/5">
+        <h1 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Edit Profile</h1>
 
         {error && (
-          <div className="bg-red-800 text-white p-3 rounded-md mb-4">
+          <div className="bg-red-800 text-white p-3 rounded-md mb-4 text-sm">
             {error}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
           {/* Photo Upload Section with updated size warning */}
           <div>
-            <p className="text-sm text-gray-400 mb-2">Max 10MB per image</p>
-            <div className="grid grid-cols-3 gap-4 md:grid-cols-5">
+            <p className="text-xs sm:text-sm text-gray-400 mb-2">Max 10MB per image</p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 lg:grid-cols-5">
               {photos.map((photo, index) => (
                 <div key={index} className="relative group">
                   <label
                     htmlFor={`photo-upload-${index}`}
                     className="block cursor-pointer"
                   >
-                    <div className="w-full h-32 bg-gray-800 rounded-lg flex items-center justify-center border border-dashed border-gray-600 hover:border-gray-400 transition-colors relative">
+                    <div className="w-full h-24 sm:h-32 bg-gray-800 rounded-lg flex items-center justify-center border border-dashed border-gray-600 hover:border-gray-400 transition-colors relative">
                       {uploadingIndex === index ? (
                         <div className="flex flex-col items-center">
-                          <div className="w-8 h-8 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mb-2"></div>
-                          <span className="text-xs">Uploading...</span>
+                          <div className="w-6 h-6 sm:w-8 sm:h-8 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mb-1 sm:mb-2"></div>
+                          <span className="text-[10px] sm:text-xs">Uploading...</span>
                         </div>
                       ) : photo ? (
                         <>
@@ -201,7 +201,7 @@ const EditProfile = () => {
                             className="absolute top-1 right-1 bg-red-600 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
                           >
                             <svg
-                              className="w-4 h-4"
+                              className="w-3 h-3 sm:w-4 sm:h-4"
                               fill="none"
                               stroke="currentColor"
                               viewBox="0 0 24 24"
@@ -217,7 +217,7 @@ const EditProfile = () => {
                         </>
                       ) : (
                         <svg
-                          className="w-8 h-8 text-gray-500"
+                          className="w-6 h-6 sm:w-8 sm:h-8 text-gray-500"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -247,12 +247,12 @@ const EditProfile = () => {
 
           {/* Rest of your form remains the same */}
           {/* Basic Information Section */}
-          <div className="bg-gray-800 p-5 rounded-lg">
-            <h2 className="text-lg font-medium mb-4">Basic Information</h2>
+          <div className="bg-gray-800 p-4 sm:p-5 rounded-lg">
+            <h2 className="text-base sm:text-lg font-medium mb-3 sm:mb-4">Basic Information</h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-1">
+                <label className="block text-xs sm:text-sm font-medium text-gray-300 mb-1">
                   First Name
                 </label>
                 <input
@@ -260,13 +260,13 @@ const EditProfile = () => {
                   name="firstName"
                   value={profile.firstName}
                   onChange={handleInputChange}
-                  className="w-full bg-gray-700 border border-gray-600 rounded-md py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  className="w-full bg-gray-700 border border-gray-600 rounded-md py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm sm:text-base"
                   placeholder="Your first name"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-1">
+                <label className="block text-xs sm:text-sm font-medium text-gray-300 mb-1">
                   Last Name
                 </label>
                 <input
@@ -274,15 +274,15 @@ const EditProfile = () => {
                   name="lastName"
                   value={profile.lastName}
                   onChange={handleInputChange}
-                  className="w-full bg-gray-700 border border-gray-600 rounded-md py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  className="w-full bg-gray-700 border border-gray-600 rounded-md py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm sm:text-base"
                   placeholder="Your last name"
                 />
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-3 sm:mt-4">
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-1">
+                <label className="block text-xs sm:text-sm font-medium text-gray-300 mb-1">
                   Age
                 </label>
                 <input
@@ -290,7 +290,7 @@ const EditProfile = () => {
                   name="age"
                   value={profile.age}
                   onChange={handleInputChange}
-                  className="w-full bg-gray-700 border border-gray-600 rounded-md py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  className="w-full bg-gray-700 border border-gray-600 rounded-md py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm sm:text-base"
                   placeholder="Your age"
                   min="18"
                   max="100"
@@ -298,14 +298,14 @@ const EditProfile = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-1">
+                <label className="block text-xs sm:text-sm font-medium text-gray-300 mb-1">
                   Gender
                 </label>
                 <select
                   name="gender"
                   value={profile.gender}
                   onChange={handleInputChange}
-                  className="w-full bg-gray-700 border border-gray-600 rounded-md py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  className="w-full bg-gray-700 border border-gray-600 rounded-md py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm sm:text-base"
                 >
                   <option value="">Select gender</option>
                   <option value="male">Male</option>
@@ -317,10 +317,10 @@ const EditProfile = () => {
           </div>
 
           {/* About Section */}
-          <div className="bg-gray-800 p-5 rounded-lg">
-            <h2 className="text-lg font-medium mb-4">About Me</h2>
+          <div className="bg-gray-800 p-4 sm:p-5 rounded-lg">
+            <h2 className="text-base sm:text-lg font-medium mb-3 sm:mb-4">About Me</h2>
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-1">
+              <label className="block text-xs sm:text-sm font-medium text-gray-300 mb-1">
                 Bio
               </label>
               <textarea
@@ -328,17 +328,17 @@ const EditProfile = () => {
                 value={profile.about}
                 onChange={handleInputChange}
                 rows={3}
-                className="w-full bg-gray-700 border border-gray-600 rounded-md py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+                className="w-full bg-gray-700 border border-gray-600 rounded-md py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm sm:text-base"
                 placeholder="Tell others about yourself"
               />
             </div>
           </div>
 
           {/* Interests Section */}
-          <div className="bg-gray-800 p-5 rounded-lg">
-            <h2 className="text-lg font-medium mb-4">Interests & Hobbies</h2>
+          <div className="bg-gray-800 p-4 sm:p-5 rounded-lg">
+            <h2 className="text-base sm:text-lg font-medium mb-3 sm:mb-4">Interests & Hobbies</h2>
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-1">
+              <label className="block text-xs sm:text-sm font-medium text-gray-300 mb-1">
                 Hobbies
               </label>
               <textarea
@@ -346,30 +346,30 @@ const EditProfile = () => {
                 value={hobbiesInput}
                 onChange={handleHobbiesChange}
                 rows={2}
-                className="w-full bg-gray-700 border border-gray-600 rounded-md py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+                className="w-full bg-gray-700 border border-gray-600 rounded-md py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm sm:text-base"
                 placeholder="e.g. hiking, photography, cooking"
               />
-              <p className="text-xs text-gray-400 mt-1">
+              <p className="text-[10px] sm:text-xs text-gray-400 mt-1">
                 Separate hobbies with commas
               </p>
             </div>
           </div>
 
           {/* Submit Button */}
-          <div className="flex gap-2 justify-end">
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-end">
             <button
               type="submit"
               disabled={isLoading || uploadingIndex !== null}
-              className="bg-gradient-to-r cursor-pointer from-purple-600 to-pink-600 text-white font-medium py-2 px-6 rounded-full hover:from-purple-700 hover:to-pink-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="bg-gradient-to-r cursor-pointer from-purple-600 to-pink-600 text-white font-medium py-2 px-4 sm:px-6 rounded-full hover:from-purple-700 hover:to-pink-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
             >
               {isLoading ? "Saving..." : "Save Changes"}
             </button>
-            <Link to="/">
+            <Link to="/" className="w-full sm:w-auto">
               {!isLoading && userData?.age && (
                 <button
-                  type="submit"
+                  type="button"
                   disabled={isLoading || uploadingIndex !== null}
-                  className="bg-gradient-to-r cursor-pointer from-purple-600 to-pink-600 text-white font-medium py-2 px-6 rounded-full hover:from-purple-700 hover:to-pink-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full sm:w-auto bg-gradient-to-r cursor-pointer from-purple-600 to-pink-600 text-white font-medium py-2 px-4 sm:px-6 rounded-full hover:from-purple-700 hover:to-pink-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
                 >
                   Home
                 </button>
@@ -378,8 +378,10 @@ const EditProfile = () => {
           </div>
         </form>
       </div>
-      <div className="mx-auto my-18">
-        <UserCard user={userData} />
+      <div className="w-full lg:w-1/3 xl:w-2/5 flex justify-center lg:justify-start">
+        <div className="w-full max-w-sm">
+          <UserCard user={userData} />
+        </div>
       </div>
     </div>
   );

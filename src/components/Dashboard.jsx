@@ -32,14 +32,14 @@ const Dashboard = ({ user }) => {
     getUserRequests();
   }, []);
   return (
-    <div className="w-full ">
-      <div className="p-4 flex items-center gap-4 bg-emerald-700 border-b-1 border-white/10">
+    <div className="w-full h-full">
+      <div className="p-3 sm:p-4 flex items-center gap-3 sm:gap-4 bg-emerald-700 border-b-1 border-white/10">
         <img
-          className="w-10 h-10 object-cover rounded-full border-2"
+          className="w-8 h-8 sm:w-10 sm:h-10 object-cover rounded-full border-2"
           src={user?.photos[0] || DEFAULT_USER_IMG}
           alt="User Img"
         />
-        <p className="font-semibold text-[18px]">
+        <p className="font-semibold text-sm sm:text-[18px]">
           {user?.firstName} {user?.lastName}
         </p>
       </div>
@@ -51,7 +51,7 @@ const Dashboard = ({ user }) => {
               dispatch(showConnection(true));
               getUserConnections();
             }}
-            className="font-semibold hover:text-emerald-700 cursor-pointer"
+            className="font-semibold hover:text-emerald-700 cursor-pointer text-sm sm:text-base"
           >
             Connections
           </p>
@@ -65,7 +65,7 @@ const Dashboard = ({ user }) => {
               dispatch(showConnection(false));
               getUserRequests();
             }}
-            className="font-semibold hover:text-emerald-700 cursor-pointer"
+            className="font-semibold hover:text-emerald-700 cursor-pointer text-sm sm:text-base"
           >
             Requests
           </p>
@@ -75,43 +75,33 @@ const Dashboard = ({ user }) => {
         </div>
       </div>
       {isConnection ? (
-        <div className="p-2">
+        <div className="p-1 sm:p-2">
           {connections && connections.length > 0 ? (
             <div className="rounded-[10px]">
               {connections.map((connection) => (
-                <Link
-                  key={connection?._id}
-                  to={`/user/profile/${connection?._id}`}
-                >
-                  <ConnectionReqCard key={connection?._id} user={connection} />
-                </Link>
+                <ConnectionReqCard key={connection?._id} user={connection} />
               ))}
             </div>
           ) : (
-            <div className="p-4 text-center text-gray-400">
+            <div className="p-4 text-center text-gray-400 text-sm">
               No connections found
             </div>
           )}
         </div>
       ) : (
-        <div className="p-2">
+        <div className="p-1 sm:p-2">
           {requests && requests.length > 0 ? (
             <div className="rounded-[10px]">
               {requests.map((request) => (
-                <Link
+                <ConnectionReqCard
                   key={request?._id}
-                  to={`/user/profile/${request?.fromUserId?._id}`}
-                >
-                  <ConnectionReqCard
-                    key={request?._id}
-                    user={request?.fromUserId}
-                    id={request?._id}
-                  />
-                </Link>
+                  user={request?.fromUserId}
+                  id={request?._id}
+                />
               ))}
             </div>
           ) : (
-            <div className="p-4 text-center text-gray-400">
+            <div className="p-4 text-center text-gray-400 text-sm">
               No requests found
             </div>
           )}

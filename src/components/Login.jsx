@@ -57,18 +57,18 @@ const Login = () => {
     }
   };
   return (
-    <div className="flex justify-center p-5">
+    <div className="flex justify-center p-3 sm:p-5 min-h-screen items-center">
       <form
         onSubmit={handleSubmit}
-        className="bg-gray-900/80 backdrop-blur-sm p-8 rounded-lg w-full max-w-md shadow-xl border border-gray-700"
+        className="bg-gray-900/80 backdrop-blur-sm p-6 sm:p-8 rounded-lg w-full max-w-sm sm:max-w-md shadow-xl border border-gray-700"
       >
-        <h2 className={`text-gray-100 text-center mb-6 text-2xl font-semibold`}>
+        <h2 className="text-gray-100 text-center mb-4 sm:mb-6 text-xl sm:text-2xl font-semibold">
           {isLogin ? "Welcome Back" : "Welcome"}
         </h2>
 
         {!isLogin && (
           <>
-            <div className="mb-5">
+            <div className="mb-4 sm:mb-5">
               <label className="block text-gray-400 mb-2 text-sm font-medium">
                 First Name
               </label>
@@ -76,11 +76,11 @@ const Login = () => {
                 type="text"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
-                className="w-full px-4 py-3 rounded bg-gray-800/70 border border-gray-600 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors"
+                className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded bg-gray-800/70 border border-gray-600 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors text-sm sm:text-base"
                 placeholder="Enter your first name"
               />
             </div>
-            <div className="mb-5">
+            <div className="mb-4 sm:mb-5">
               <label className="block text-gray-400 mb-2 text-sm font-medium">
                 Last Name
               </label>
@@ -88,14 +88,14 @@ const Login = () => {
                 type="text"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
-                className="w-full px-4 py-3 rounded bg-gray-800/70 border border-gray-600 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors"
+                className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded bg-gray-800/70 border border-gray-600 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors text-sm sm:text-base"
                 placeholder="Enter your last name"
               />
             </div>
           </>
         )}
 
-        <div className="mb-5">
+        <div className="mb-4 sm:mb-5">
           <label className="block text-gray-400 mb-2 text-sm font-medium">
             Email
           </label>
@@ -103,12 +103,12 @@ const Login = () => {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-4 py-3 rounded bg-gray-800/70 border border-gray-600 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors"
+            className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded bg-gray-800/70 border border-gray-600 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors text-sm sm:text-base"
             placeholder="Enter your email"
           />
         </div>
 
-        <div className="mb-6 relative">
+        <div className="mb-4 sm:mb-6 relative">
           <label className="block text-gray-400 mb-2 text-sm font-medium">
             Password
           </label>
@@ -116,21 +116,21 @@ const Login = () => {
             type={isPwdVisible ? "password" : "text"}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-4 py-3  rounded bg-gray-800/70 border border-gray-600 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors"
+            className="w-full px-3 sm:px-4 py-2 sm:py-3 pr-10 sm:pr-12 rounded bg-gray-800/70 border border-gray-600 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors text-sm sm:text-base"
             placeholder="Enter your password"
           />
           {isPwdVisible ? (
             <LuEyeClosed
               color="gray"
-              size={25}
-              className="absolute top-10 right-4"
+              size={20}
+              className="absolute top-8 sm:top-10 right-3 sm:right-4 cursor-pointer"
               onClick={togglePassword}
             />
           ) : (
             <LuEye
               color="gray"
-              size={25}
-              className="absolute top-10 right-4"
+              size={20}
+              className="absolute top-8 sm:top-10 right-3 sm:right-4 cursor-pointer"
               onClick={togglePassword}
             />
           )}
@@ -138,19 +138,19 @@ const Login = () => {
 
         <button
           type="submit"
-          className="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-3 px-4 rounded font-semibold hover:from-purple-700 hover:to-blue-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+          className="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-2 sm:py-3 px-4 rounded font-semibold hover:from-purple-700 hover:to-blue-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-900 text-sm sm:text-base"
           onClick={handleSubmit}
         >
           {isLogin ? "Sign In" : "Sign Up"}
         </button>
-        <div className="flex justify-between my-1">
-          <p className="text-gray-400 font-semibold">
+        <div className="flex justify-between items-center my-3 sm:my-4 gap-2">
+          <p className="text-gray-400 font-semibold text-xs sm:text-sm">
             {isLogin ? "Don't have an account!" : "Already account exist!"}
           </p>
 
           <p
             onClick={toggleLoginPage}
-            className="font-extrabold text-emerald-700 cursor-pointer underline"
+            className="font-extrabold text-emerald-700 cursor-pointer underline text-xs sm:text-sm"
           >
             {isLogin ? "Sign Up" : "Login"}
           </p>

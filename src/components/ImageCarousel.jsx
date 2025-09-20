@@ -33,7 +33,7 @@ const ImageCarousel = ({
   }, [isAutoPlaying, goToNext, interval, photos.length]);
 
   return (
-    <div className="relative w-full max-w-md mx-auto h-full bg-black rounded-lg overflow-hidden shadow-xl">
+    <div className="relative w-full h-full bg-black rounded-lg overflow-hidden shadow-xl">
       {/* Main Image */}
       <div className="relative w-full h-full">
         <Link to={`/user/profile/${userId}`}>
@@ -46,11 +46,11 @@ const ImageCarousel = ({
         </Link>
 
         {photos.length > 1 && (
-          <div className="absolute top-2 left-4 right-4 flex gap-1 z-10">
+          <div className="absolute top-2 left-2 sm:left-4 right-2 sm:right-4 flex gap-1 z-10">
             {Array.from({ length: photos.length }).map((_, index) => (
               <div
                 key={index}
-                className={`h-1 flex-1 rounded-full transition-all duration-300 ${
+                className={`h-0.5 sm:h-1 flex-1 rounded-full transition-all duration-300 ${
                   index === currentIndex
                     ? "bg-emerald-600"
                     : "bg-gray-400 bg-opacity-50"
@@ -66,11 +66,11 @@ const ImageCarousel = ({
         <>
           <button
             onClick={goToPrevious}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/10 bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-70 transition-all duration-200 hover:scale-110"
+            className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-white/10 bg-opacity-50 text-white p-2 sm:p-3 rounded-full hover:bg-opacity-70 transition-all duration-200 hover:scale-110"
             aria-label="Previous photo"
           >
             <svg
-              className="w-6 h-6"
+              className="w-4 h-4 sm:w-6 sm:h-6"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -86,11 +86,11 @@ const ImageCarousel = ({
 
           <button
             onClick={goToNext}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/10 bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-70 transition-all duration-200 hover:scale-110"
+            className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-white/10 bg-opacity-50 text-white p-2 sm:p-3 rounded-full hover:bg-opacity-70 transition-all duration-200 hover:scale-110"
             aria-label="Next photo"
           >
             <svg
-              className="w-6 h-6"
+              className="w-4 h-4 sm:w-6 sm:h-6"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"

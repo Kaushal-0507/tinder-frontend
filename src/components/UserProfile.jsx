@@ -30,14 +30,14 @@ const UserProfile = () => {
   const validPhotos = photos?.filter((photo) => photo !== null) || [];
 
   return (
-    <div className="flex flex-col lg:flex-row px-10 py-4 gap-4">
+    <div className="flex flex-col lg:flex-row px-4 sm:px-6 lg:px-10 py-4 gap-4 lg:gap-6">
       {/* Left Side - Image Carousel */}
 
-      <div className="min-w-[320px] h-[500px] rounded-xl overflow-hidden shadow-lg">
+      <div className="w-full lg:min-w-[320px] lg:w-auto h-64 sm:h-80 lg:h-[500px] rounded-xl overflow-hidden shadow-lg">
         {validPhotos.length > 0 ? (
           <ImageCarousel photos={validPhotos} autoPlay={true} interval={4000} />
         ) : (
-          <div className="w-full h-96 flex items-center justify-center bg-gray-800">
+          <div className="w-full h-full flex items-center justify-center bg-gray-800">
             <img
               className="w-full h-full object-cover"
               src={DEFAULT_USER_IMG}
@@ -49,25 +49,25 @@ const UserProfile = () => {
 
       {/* Right Side - User Details */}
 
-      <div className="space-y-6 w-full">
+      <div className="space-y-4 sm:space-y-6 w-full">
         {/* Header Section */}
-        <div className="border-b border-gray-700 pb-6">
-          <h1 className="text-3xl font-bold text-white">
+        <div className="border-b border-gray-700 pb-4 sm:pb-6">
+          <h1 className="text-2xl sm:text-3xl font-bold text-white">
             {firstName} {lastName}
           </h1>
-          <div className="flex items-center gap-4 mt-2">
-            <span className="text-xl text-gray-300">{age} years</span>
-            <span className="text-sm bg-purple-600 px-3 py-1 rounded-full capitalize">
+          <div className="flex items-center gap-3 sm:gap-4 mt-2">
+            <span className="text-lg sm:text-xl text-gray-300">{age} years</span>
+            <span className="text-xs sm:text-sm bg-purple-600 px-2 sm:px-3 py-1 rounded-full capitalize">
               {gender || "Not specified"}
             </span>
           </div>
         </div>
 
         {/* About Section */}
-        <div className="space-y-3">
-          <h2 className="text-xl font-semibold text-white flex items-center gap-2">
+        <div className="space-y-2 sm:space-y-3">
+          <h2 className="text-lg sm:text-xl font-semibold text-white flex items-center gap-2">
             <svg
-              className="w-5 h-5 text-purple-400"
+              className="w-4 h-4 sm:w-5 sm:h-5 text-purple-400"
               fill="currentColor"
               viewBox="0 0 20 20"
             >
@@ -79,17 +79,17 @@ const UserProfile = () => {
             </svg>
             About
           </h2>
-          <p className="text-gray-300 leading-relaxed">
+          <p className="text-gray-300 leading-relaxed text-sm sm:text-base">
             {about || "No bio available yet."}
           </p>
         </div>
 
         {/* Hobbies Section */}
         {hobbies && hobbies.length > 0 && (
-          <div className="space-y-3">
-            <h2 className="text-xl font-semibold text-white flex items-center gap-2">
+          <div className="space-y-2 sm:space-y-3">
+            <h2 className="text-lg sm:text-xl font-semibold text-white flex items-center gap-2">
               <svg
-                className="w-5 h-5 text-purple-400"
+                className="w-4 h-4 sm:w-5 sm:h-5 text-purple-400"
                 fill="currentColor"
                 viewBox="0 0 20 20"
               >
@@ -97,11 +97,11 @@ const UserProfile = () => {
               </svg>
               Interests & Hobbies
             </h2>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-1 sm:gap-2">
               {hobbies.map((hobby, index) => (
                 <span
                   key={index}
-                  className="bg-gray-700 text-gray-300 px-3 py-2 rounded-lg text-sm border border-gray-600 hover:bg-gray-600 transition-colors"
+                  className="bg-gray-700 text-gray-300 px-2 sm:px-3 py-1 sm:py-2 rounded-lg text-xs sm:text-sm border border-gray-600 hover:bg-gray-600 transition-colors"
                 >
                   {hobby}
                 </span>
@@ -111,18 +111,18 @@ const UserProfile = () => {
         )}
 
         {/* Stats Section */}
-        <div className="grid grid-cols-2 gap-4 pt-4 border-t border-gray-700">
-          <div className="text-center p-4 bg-gray-700 rounded-lg">
-            <div className="text-2xl font-bold text-purple-400">
+        <div className="grid grid-cols-2 gap-3 sm:gap-4 pt-4 border-t border-gray-700">
+          <div className="text-center p-3 sm:p-4 bg-gray-700 rounded-lg">
+            <div className="text-xl sm:text-2xl font-bold text-purple-400">
               {validPhotos.length}
             </div>
-            <div className="text-sm text-gray-400">Photos</div>
+            <div className="text-xs sm:text-sm text-gray-400">Photos</div>
           </div>
-          <div className="text-center p-4 bg-gray-700 rounded-lg">
-            <div className="text-2xl font-bold text-purple-400">
+          <div className="text-center p-3 sm:p-4 bg-gray-700 rounded-lg">
+            <div className="text-xl sm:text-2xl font-bold text-purple-400">
               {hobbies?.length || 0}
             </div>
-            <div className="text-sm text-gray-400">Interests</div>
+            <div className="text-xs sm:text-sm text-gray-400">Interests</div>
           </div>
         </div>
       </div>
