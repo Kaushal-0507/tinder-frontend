@@ -9,8 +9,8 @@ import { LuEyeClosed } from "react-icons/lu";
 import { LuEye } from "react-icons/lu";
 
 const Login = () => {
-  const [email, setEmail] = useState("lisbon@gmail.com");
-  const [password, setPassword] = useState("Lisbon@123");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const dispatch = useDispatch();
