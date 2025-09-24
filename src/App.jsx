@@ -8,6 +8,7 @@ import { Provider, useSelector } from "react-redux";
 import appStore from "./utils/appStore";
 import Feed from "./components/Feed";
 import UserProfile from "./components/UserProfile";
+import UserSettings from "./components/UserSettings";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/user/profile/:userId" element={<UserProfile />} />
+            <Route path="/profile/userSetting" element={<UserSettings />} />
           </Route>
         </Routes>
       </BrowserRouter>

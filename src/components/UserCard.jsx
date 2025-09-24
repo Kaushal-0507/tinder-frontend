@@ -3,6 +3,7 @@ import { BASE_URL, DEFAULT_USER_IMG } from "../utils/constant";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { removeUserFeed } from "../utils/feedSlice";
+import { Link } from "react-router-dom";
 const ImageCarousel = lazy(() => import("./ImageCarousel"));
 
 const UserCard = ({ user }) => {
@@ -106,15 +107,17 @@ const UserCard = ({ user }) => {
         </button>
 
         {/* More Options Button */}
-        <button className="w-10 sm:w-12 h-10 sm:h-12 rounded-full bg-gray-800 shadow-md flex items-center justify-center text-gray-400 hover:bg-gray-700 transition-colors border border-gray-700">
-          <svg
-            className="w-5 sm:w-6 h-5 sm:h-6"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path d="M12 8C13.1 8 14 7.1 14 6C14 4.9 13.1 4 12 4C10.9 4 10 4.9 10 6C10 7.1 10.9 8 12 8ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10ZM12 16C10.9 16 10 16.9 10 18C10 19.1 10.9 20 12 20C13.1 20 14 19.1 14 18C14 16.9 13.1 16 12 16Z" />
-          </svg>
-        </button>
+        <Link to={`/user/profile/${_id}`}>
+          <button className="w-10 sm:w-12 h-10 sm:h-12 rounded-full bg-gray-800 shadow-md flex items-center justify-center text-gray-400 hover:bg-gray-700 transition-colors border border-gray-700">
+            <svg
+              className="w-5 sm:w-6 h-5 sm:h-6"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path d="M12 8C13.1 8 14 7.1 14 6C14 4.9 13.1 4 12 4C10.9 4 10 4.9 10 6C10 7.1 10.9 8 12 8ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10ZM12 16C10.9 16 10 16.9 10 18C10 19.1 10.9 20 12 20C13.1 20 14 19.1 14 18C14 16.9 13.1 16 12 16Z" />
+            </svg>
+          </button>
+        </Link>
       </div>
     </div>
   );
