@@ -23,7 +23,7 @@ const UserCard = ({ user }) => {
     <div className="w-full max-w-sm sm:max-w-md lg:w-88 h-[85vh] sm:h-[90vh] lg:max-h-[500px] lg:h-[95%] bg-gray-900 rounded-2xl overflow-hidden shadow-xl relative border border-gray-700 mx-auto ">
       {/* User Photo */}
       <div className="relative h-full lg:max-h-[500px] overflow-hidden mx-auto">
-        {photos.length > 0 ? (
+        {photos?.length > 0 ? (
           <Suspense fallback={<div>Loading gallery...</div>}>
             <ImageCarousel
               photos={photos}

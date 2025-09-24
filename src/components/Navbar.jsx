@@ -57,7 +57,7 @@ const Navbar = () => {
                   <img
                     alt="User profile"
                     src={
-                      user?.photos.length > 0
+                      user?.photos?.length > 0
                         ? user.photos[0]
                         : DEFAULT_USER_IMG
                     }

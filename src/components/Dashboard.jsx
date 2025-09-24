@@ -36,7 +36,7 @@ const Dashboard = ({ user }) => {
       <div className="p-3 sm:p-4 flex items-center gap-3 sm:gap-4 bg-emerald-700 border-b-1 border-white/10">
         <img
           className="w-8 h-8 sm:w-10 sm:h-10 object-cover rounded-full border-2"
-          src={user?.photos[0] || DEFAULT_USER_IMG}
+          src={user?.photos?.[0] || DEFAULT_USER_IMG}
           alt="User Img"
           loading="lazy"
         />
