@@ -44,7 +44,7 @@ const ConnectionReqCard = ({ user, id }) => {
       </div>
       <div className="flex items-center ml-2">
         {isConnection ? (
-          <p className="font-semibold h-8 sm:h-9 pt-1 bg-emerald-700 hover:bg-emerald-600 cursor-pointer px-2 sm:px-3 rounded-[5px] text-xs sm:text-sm">
+          <p className="font-semibold h-8 sm:h-9 bg-emerald-700 hover:bg-emerald-600 cursor-pointer px-2 sm:px-3 rounded-[5px] text-xs sm:text-sm flex items-center justify-center">
             message
           </p>
         ) : (

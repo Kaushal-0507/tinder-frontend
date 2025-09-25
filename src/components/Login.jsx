@@ -57,7 +57,11 @@ const Login = () => {
     }
   };
   return (
-    <div className="flex justify-center p-3 sm:p-5 min-h-screen items-center">
+    <div
+      className={`flex justify-center p-3 sm:p-5 min-h-screen items-center ${
+        isLogin ? "mt-0" : "mt-16"
+      }`}
+    >
       <form
         onSubmit={handleSubmit}
         className="bg-gray-900/80 backdrop-blur-sm p-6 sm:p-8 rounded-lg w-full max-w-sm sm:max-w-md shadow-xl border border-gray-700"
@@ -112,28 +116,26 @@ const Login = () => {
           <label className="block text-gray-400 mb-2 text-sm font-medium">
             Password
           </label>
-          <input
-            type={isPwdVisible ? "password" : "text"}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-3 sm:px-4 py-2 sm:py-3 pr-10 sm:pr-12 rounded bg-gray-800/70 border border-gray-600 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors text-sm sm:text-base"
-            placeholder="Enter your password"
-          />
-          {isPwdVisible ? (
-            <LuEyeClosed
-              color="gray"
-              size={20}
-              className="absolute top-8 sm:top-10 right-3 sm:right-4 cursor-pointer"
-              onClick={togglePassword}
+          <div className="relative">
+            <input
+              type={isPwdVisible ? "text" : "password"}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full px-3 sm:px-4 py-2 sm:py-3 pr-10 sm:pr-12 rounded bg-gray-800/70 border border-gray-600 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors text-sm sm:text-base"
+              placeholder="Enter your password"
             />
-          ) : (
-            <LuEye
-              color="gray"
-              size={20}
-              className="absolute top-8 sm:top-10 right-3 sm:right-4 cursor-pointer"
+            <button
+              type="button"
               onClick={togglePassword}
-            />
-          )}
+              className="absolute inset-y-0 right-0 pr-3 flex items-center"
+            >
+              {isPwdVisible ? (
+                <LuEyeClosed color="gray" size={20} />
+              ) : (
+                <LuEye color="gray" size={20} />
+              )}
+            </button>
+          </div>
         </div>
 
         <button

@@ -182,7 +182,7 @@ const EditProfile = () => {
                     htmlFor={`photo-upload-${index}`}
                     className="block cursor-pointer"
                   >
-                    <div className="w-full h-24 sm:h-32 bg-gray-800 rounded-lg flex items-center justify-center border border-dashed border-gray-600 hover:border-gray-400 transition-colors relative">
+                    <div className="w-full h-46 sm:h-40 bg-gray-800 rounded-lg flex items-center justify-center border border-dashed border-gray-600 hover:border-gray-400 transition-colors relative">
                       {uploadingIndex === index ? (
                         <div className="flex flex-col items-center">
                           <div className="w-6 h-6 sm:w-8 sm:h-8 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mb-1 sm:mb-2"></div>
@@ -391,7 +391,7 @@ const EditProfile = () => {
           </div>
         </form>
       </div>
-      <div className="w-full lg:w-1/3 xl:w-2/5 flex justify-center lg:justify-start">
+      <div className="w-full lg:w-1/3 xl:w-2/5 flex justify-center lg:justify-center">
         <div className="w-full max-w-sm">
           <UserCard user={userData} />
         </div>

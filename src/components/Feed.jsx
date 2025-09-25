@@ -8,7 +8,7 @@ import Dashboard from "./Dashboard";
 
 const Feed = () => {
   const feed = useSelector((state) => state.feed);
-  const user = useSelector((state) => state.user);
+  const loggedUser = useSelector((state) => state.user);
   const isDashboard = useSelector((state) => state.toggle.isDashboard);
 
   const dispatch = useDispatch();
@@ -30,14 +30,15 @@ const Feed = () => {
 
   return (
     <div className="flex relative min-h-screen">
+      {/* Dashboard Container - Fixed height on both mobile and desktop */}
       <div
         className={`${
           isDashboard
-            ? "block bg-gray-800 absolute w-full sm:w-3/4 md:w-2/3 lg:w-1/3 top-0 bottom-0 z-40"
+            ? "block bg-gray-800 absolute  w-full sm:w-3/4 md:w-2/3 lg:w-1/3 top-0 bottom-0 z-40"
             : "hidden"
-        } lg:block lg:static border-r-1 lg:w-1/3 border-white/10`}
+        } lg:block lg:static border-r-1 lg:w-1/3 border-white/10 lg:h-screen lg:pt-16 pt-16`}
       >
-        <Dashboard user={user} />
+        <Dashboard user={loggedUser} />
       </div>
 
       {feed.length <= 0 ? (
@@ -45,7 +46,9 @@ const Feed = () => {
           No New User
         </div>
       ) : (
-        <div className="flex-1 p-2 sm:p-4">{feed && <UserCard user={feed[0]} />}</div>
+        <div className="flex-1 sm:p-4 lg:pt-20 pt-18">
+          {feed && <UserCard user={feed[0]} />}
+        </div>
       )}
     </div>
   );

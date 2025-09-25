@@ -30,7 +30,7 @@ const UserProfile = () => {
   const validPhotos = photos?.filter((photo) => photo !== null) || [];
 
   return (
-    <div className="flex flex-col lg:flex-row px-4 sm:px-6 lg:px-10 py-4 gap-4 lg:gap-6">
+    <div className="flex flex-col pt-20 lg:flex-row px-4 sm:px-6 lg:px-10 py-4 gap-4 lg:gap-6">
       {/* Left Side - Image Carousel */}
 
       <div className="sm:w-1/2 lg:min-w-[320px] sm:mx-auto lg:w-auto h-120 sm:h-120 lg:h-[500px] rounded-xl overflow-hidden shadow-lg">
