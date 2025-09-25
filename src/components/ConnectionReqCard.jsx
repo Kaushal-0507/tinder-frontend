@@ -6,10 +6,16 @@ import { FaCheck } from "react-icons/fa";
 import axios from "axios";
 import { removeUserRequest } from "../utils/requestSlice";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const ConnectionReqCard = ({ user, id }) => {
   const isConnection = useSelector((store) => store.connections.isConnection);
   const dispatch = useDispatch();
+
+  const sendMessageProgress = () => {
+    toast("In progress!", { type: "info" });
+  };
+
   const reviewRequests = async (status, _id) => {
     const res = await axios.post(
       BASE_URL + "/request/review/" + status + "/" + _id,
@@ -44,7 +50,10 @@ const ConnectionReqCard = ({ user, id }) => {
       </div>
       <div className="flex items-center ml-2">
         {isConnection ? (
-          <p className="font-semibold h-8 sm:h-9 bg-emerald-700 hover:bg-emerald-600 cursor-pointer px-2 sm:px-3 rounded-[5px] text-xs sm:text-sm flex items-center justify-center">
+          <p
+            onClick={() => sendMessageProgress()}
+            className="font-semibold h-8 sm:h-9 bg-emerald-700 hover:bg-emerald-600 cursor-pointer px-2 sm:px-3 rounded-[5px] text-xs sm:text-sm flex items-center justify-center"
+          >
             message
           </p>
         ) : (
