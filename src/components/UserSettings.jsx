@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constant";
 
 const UserSettings = () => {
@@ -13,12 +13,45 @@ const UserSettings = () => {
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent mb-3">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-emerald-400 via-emerald-700 to-blue-700 bg-clip-text text-transparent mb-3">
             Account Settings
           </h1>
           <p className="text-gray-400 text-lg">
             Manage your account preferences and security
           </p>
+        </div>
+
+        {/* Premium Plan Notice - New Addition */}
+        <div className="mb-8 bg-gradient-to-r from-emerald-900/50  to-blue-900/30 border border-emerald-500/30 rounded-2xl p-6 hover:border-purple-400/50 transition-all duration-300 group relative overflow-hidden">
+          {/* Animated background effect */}
+          <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-blue-500/5 group-hover:from-emerald-500/20 group-hover:to-blue-500/10 transition-all duration-500"></div>
+
+          <div className="relative z-10 flex items-center space-x-4">
+            <div className="p-3 bg-white/10 rounded-xl group-hover:scale-110 transition-transform duration-300">
+              <span className="text-2xl">⭐</span>
+            </div>
+            <div className="flex-1">
+              <div className="flex flex-wrap items-center gap-2 mb-2">
+                <h3 className="text-xl font-semibold text-white">
+                  Premium Plan Available!
+                </h3>
+                <span className="px-2 py-1 bg-emerald-500/20 text-blue-300 text-xs font-medium rounded-full border border-emerald-500/30">
+                  NEW
+                </span>
+              </div>
+              <p className="text-gray-300 text-sm leading-relaxed mb-3">
+                Unlock exclusive features: Unlimited connections, advanced user
+                profile features, and priority support.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Link to="/premium">
+                  <button className="px-4 py-2 bg-gradient-to-r from-emerald-600/60 to-blue-600/30 hover:from-emerald-700 hover:to-blue-700/70 text-white rounded-lg font-medium transition-all duration-200 hover:scale-105 transform shadow-lg shadow-purple-600/20">
+                    Learn More
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Settings Grid */}
@@ -40,7 +73,7 @@ const UserSettings = () => {
               </div>
             </div>
             <button
-              className="w-full mt-6 px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-xl font-medium transition-all duration-200 hover:scale-105 transform shadow-lg shadow-red-600/20 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full mt-6 px-6 py-3 bg-red-600/50 hover:bg-red-700 text-white rounded-xl font-medium transition-all duration-200 hover:scale-105 transform shadow-lg shadow-red-600/20 disabled:opacity-50 disabled:cursor-not-allowed"
               onClick={() => setActivePopup("delete")}
               disabled={loading}
             >
@@ -65,7 +98,7 @@ const UserSettings = () => {
               </div>
             </div>
             <button
-              className="w-full mt-6 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-medium transition-all duration-200 hover:scale-105 transform shadow-lg shadow-blue-600/20 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full mt-6 px-6 py-3 bg-blue-600/50 hover:bg-blue-700 text-white rounded-xl font-medium transition-all duration-200 hover:scale-105 transform shadow-lg shadow-blue-600/20 disabled:opacity-50 disabled:cursor-not-allowed"
               onClick={() => setActivePopup("changePassword")}
               disabled={loading}
             >

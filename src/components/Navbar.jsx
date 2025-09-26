@@ -34,10 +34,6 @@ const Navbar = () => {
     <>
       <div className="navbar absolute top-0 z-50 bg-base-200 shadow-sm px-2 sm:px-4">
         <div className="flex-1">
-          {/* <a className="text-xl font-semibold text-gray-300">
-            meet<span className="text-emerald-700 font-bold">Devs</span>
-            
-          </a> */}
           <Link
             to="/"
             className="text-lg sm:text-xl md:text-2xl font-bold text-emerald-700 cursor-pointer"
@@ -77,6 +73,9 @@ const Navbar = () => {
                 </li>
                 <li>
                   <Link to="/profile/userSetting">Settings</Link>
+                </li>
+                <li>
+                  <Link to="/premium">Premium</Link>
                 </li>
                 <li onClick={handleLogout}>
                   <a>Logout </a>

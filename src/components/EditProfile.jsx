@@ -373,7 +373,7 @@ const EditProfile = () => {
             <button
               type="submit"
               disabled={isLoading || uploadingIndex !== null}
-              className="bg-gradient-to-r cursor-pointer from-purple-600 to-pink-600 text-white font-medium py-2 px-4 sm:px-6 rounded-full hover:from-purple-700 hover:to-pink-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
+              className="bg-gradient-to-r cursor-pointer from-emerald-600  to-blue-600  text-white font-medium py-2 px-4 sm:px-6 rounded-full hover:from-emerald-500  hover:to-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
             >
               {isLoading ? "Saving..." : "Save Changes"}
             </button>
@@ -382,7 +382,7 @@ const EditProfile = () => {
                 <button
                   type="button"
                   disabled={isLoading || uploadingIndex !== null}
-                  className="w-full sm:w-auto bg-gradient-to-r cursor-pointer from-purple-600 to-pink-600 text-white font-medium py-2 px-4 sm:px-6 rounded-full hover:from-purple-700 hover:to-pink-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
+                  className="w-full sm:w-auto bg-gradient-to-r cursor-pointer from-emerald-600 to-blue-600 text-white font-medium py-2 px-4 sm:px-6 rounded-full hover:from-emerald-700 hover:to-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
                 >
                   Home
                 </button>
