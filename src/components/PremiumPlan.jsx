@@ -164,7 +164,8 @@ const PremiumPlan = () => {
   const ConfirmationPopup = () => {
     if (!currentPlan) return null;
 
-    return user.isPremium === true ? (
+    return user.isPremium === true &&
+      user.membershipType === currentPlan.name ? (
       <div className="font-bold text-3xl m-auto text-emerald-600">
         `You are a ${user.membershipType} user`
       </div>
