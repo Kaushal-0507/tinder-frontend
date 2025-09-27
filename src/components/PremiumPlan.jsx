@@ -13,6 +13,7 @@ const PremiumPlan = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
+
   const plans = {
     silver: {
       name: "Silver",
@@ -86,7 +87,9 @@ const PremiumPlan = () => {
       if (res.msg === "Payment successful") {
         console.log(res);
         dispatch(addUser(res.user));
+        setShowConfirmation(false);
       } else {
+        setShowConfirmation(false);
         toast("Payment failed", { type: "error" });
       }
     } catch (error) {
