@@ -3,6 +3,7 @@ import { BASE_URL } from "../utils/constant";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { toast } from "react-toastify";
 
 const PremiumPlan = () => {
   const [selectedPlan, setSelectedPlan] = useState("");
@@ -82,8 +83,12 @@ const PremiumPlan = () => {
       const res = await axios.get(BASE_URL + "/payment/verify", {
         withCredentials: true,
       });
-      console.log(res);
-      dispatch(addUser(res));
+      if (res.msg === "Payment successful") {
+        console.log(res);
+        dispatch(addUser(res.user));
+      } else {
+        toast("Payment failed", { type: "error" });
+      }
     } catch (error) {
       console.log(error);
     }
@@ -165,8 +170,8 @@ const PremiumPlan = () => {
     if (!currentPlan) return null;
 
     return user.isPremium === true &&
-      user.membershipType === currentPlan.name ? (
-      <div className="font-bold text-3xl m-auto text-emerald-600">
+      user.membershipType === currentPlan.name.toLowerCase() ? (
+      <div className="font-bold w-full h-full text-3xl m-auto text-emerald-600">
         `You are a ${user.membershipType} user`
       </div>
     ) : (
