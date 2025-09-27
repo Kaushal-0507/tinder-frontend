@@ -84,12 +84,16 @@ const PremiumPlan = () => {
       const res = await axios.get(BASE_URL + "/payment/verify", {
         withCredentials: true,
       });
+      console.log(res);
       if (res.msg === "Payment successful") {
-        console.log(res);
+        console.log(res.msg);
         dispatch(addUser(res.user));
+        toast("Payment successful", { type: "success" });
         setShowConfirmation(false);
       } else {
         setShowConfirmation(false);
+        dispatch(addUser(res.user));
+
         toast("Payment failed", { type: "error" });
       }
     } catch (error) {
@@ -123,7 +127,6 @@ const PremiumPlan = () => {
   const membershipPlan = async (membershipType, period) => {
     try {
       setLoading(true);
-      console.log("Processing payment for:", { membershipType, period });
 
       const order = await axios.post(
         BASE_URL + "/payment/order",
@@ -133,7 +136,6 @@ const PremiumPlan = () => {
         },
         { withCredentials: true }
       );
-      console.log(order);
 
       const { amount, keyId, currency, notes, orderId } = order.data;
 
