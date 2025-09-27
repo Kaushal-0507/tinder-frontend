@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { BASE_URL } from "../utils/constant";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 const PremiumPlan = () => {
   const [selectedPlan, setSelectedPlan] = useState("");
@@ -8,7 +10,8 @@ const PremiumPlan = () => {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [currentPlan, setCurrentPlan] = useState(null);
   const [loading, setLoading] = useState(false);
-
+  const dispatch = useDispatch();
+  const user = useSelector((store) => store.user);
   const plans = {
     silver: {
       name: "Silver",
@@ -74,6 +77,18 @@ const PremiumPlan = () => {
     platinum: "17%",
   };
 
+  const verifyPremiumUser = async () => {
+    try {
+      const res = await axios.get(BASE_URL + "/payment/verify", {
+        withCredentials: true,
+      });
+      console.log(res);
+      dispatch(addUser(res));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handlePlanSelection = (planKey) => {
     setSelectedPlan(planKey);
     setCurrentPlan({
@@ -128,6 +143,7 @@ const PremiumPlan = () => {
         theme: {
           color: "#F37254",
         },
+        handler: verifyPremiumUser,
       };
 
       const rzp = new window.Razorpay(options);
@@ -148,7 +164,11 @@ const PremiumPlan = () => {
   const ConfirmationPopup = () => {
     if (!currentPlan) return null;
 
-    return (
+    return user.isPremium === true ? (
+      <div className="font-bold text-3xl m-auto text-emerald-600">
+        `You are a ${user.membershipType} user`
+      </div>
+    ) : (
       <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 backdrop-blur-sm">
         <div className="bg-gradient-to-br from-gray-800 to-gray-900 border-2 border-purple-500 rounded-2xl p-4 w-full max-w-md mx-4 shadow-2xl">
           {/* Header */}
