@@ -171,8 +171,8 @@ const PremiumPlan = () => {
 
     return user.isPremium === true &&
       user.membershipType === currentPlan.name.toLowerCase() ? (
-      <div className="font-bold w-full h-full text-3xl m-auto text-emerald-600">
-        `You are a ${user.membershipType} user`
+      <div className="fixed font-bold w-full h-full text-3xl m-auto text-emerald-600">
+        You are already {user.membershipType} user
       </div>
     ) : (
       <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 backdrop-blur-sm">
