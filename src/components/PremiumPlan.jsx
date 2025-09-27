@@ -85,14 +85,14 @@ const PremiumPlan = () => {
         withCredentials: true,
       });
       console.log(res);
-      if (res.msg === "Payment successful") {
+      if (res.data.msg === "Payment successful") {
         console.log(res.msg);
-        dispatch(addUser(res.user));
+        dispatch(addUser(res.data.user));
         toast("Payment successful", { type: "success" });
         setShowConfirmation(false);
       } else {
         setShowConfirmation(false);
-        dispatch(addUser(res.user));
+        dispatch(addUser(res.data.user));
 
         toast("Payment failed", { type: "error" });
       }
@@ -263,7 +263,7 @@ const PremiumPlan = () => {
               disabled={loading}
               className="flex-1 px-4 py-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? "Processing..." : "Confirm & Pay"}
+              Confirm & Pay
             </button>
           </div>
 
