@@ -253,14 +253,12 @@ const PremiumPlan = () => {
           <div className="flex gap-3">
             <button
               onClick={closeConfirmation}
-              disabled={loading}
               className="flex-1 px-4 py-3 bg-gray-700 hover:bg-gray-600 text-white rounded-lg font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Cancel
             </button>
             <button
               onClick={handleConfirmPurchase}
-              disabled={loading}
               className="flex-1 px-4 py-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Confirm & Pay
