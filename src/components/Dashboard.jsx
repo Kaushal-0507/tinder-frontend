@@ -6,6 +6,7 @@ import { addConnections, showConnection } from "../utils/connectionSlice";
 import ConnectionReqCard from "./ConnectionReqCard";
 import { addUserRequest } from "../utils/requestSlice";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Dashboard = ({ user }) => {
   const { connections, isConnection } = useSelector(
@@ -14,24 +15,46 @@ const Dashboard = ({ user }) => {
   const requests = useSelector((store) => store.requests);
 
   const dispatch = useDispatch();
+
   const getUserConnections = async () => {
-    const res = await axios.get(BASE_URL + "/user/connections", {
-      withCredentials: true,
-    });
-    console.log(res);
-    dispatch(addConnections(res?.data?.data));
+    try {
+      const res = await axios.get(BASE_URL + "/user/connections", {
+        withCredentials: true,
+      });
+      dispatch(addConnections(res?.data?.data || []));
+    } catch (error) {
+      console.error("Error fetching connections:", error);
+      toast("Failed to load connections", { type: "error" });
+      dispatch(addConnections([])); // Set empty array on error
+    }
   };
 
   const getUserRequests = async () => {
-    const res = await axios.get(BASE_URL + "/user/requests", {
-      withCredentials: true,
-    });
-    dispatch(addUserRequest(res?.data?.data));
+    try {
+      const res = await axios.get(BASE_URL + "/user/requests", {
+        withCredentials: true,
+      });
+      dispatch(addUserRequest(res?.data?.data || []));
+    } catch (error) {
+      console.error("Error fetching requests:", error);
+      toast("Failed to load requests", { type: "error" });
+      dispatch(addUserRequest([])); // Set empty array on error
+    }
   };
+
   useEffect(() => {
     getUserConnections();
     getUserRequests();
   }, []);
+
+  // Filter out any potential null users (safety check)
+  const validConnections =
+    connections?.filter((connection) => connection && connection._id) || [];
+
+  const validRequests =
+    requests?.filter(
+      (request) => request && request._id && request.fromUserId
+    ) || [];
 
   return (
     <div className="w-full h-full flex flex-col">
@@ -86,14 +109,12 @@ const Dashboard = ({ user }) => {
 
       {/* Scrollable Content Section - Takes remaining space */}
       <div className="flex-1 min-h-0 overflow-hidden">
-        {" "}
-        {/* Important: min-h-0 allows flex child to shrink */}
         {isConnection ? (
           <div className="h-full p-1 sm:p-2">
-            {connections && connections.length > 0 ? (
+            {validConnections.length > 0 ? (
               <div className="h-full overflow-y-auto hide-scrollbar">
                 <div className="rounded-[10px]">
-                  {connections.map((connection) => (
+                  {validConnections.map((connection) => (
                     <ConnectionReqCard
                       key={connection?._id}
                       user={connection}
@@ -109,10 +130,10 @@ const Dashboard = ({ user }) => {
           </div>
         ) : (
           <div className="h-full p-1 sm:p-2">
-            {requests && requests.length > 0 ? (
+            {validRequests.length > 0 ? (
               <div className="h-full overflow-y-auto hide-scrollbar">
                 <div className="rounded-[10px]">
-                  {requests.map((request) => (
+                  {validRequests.map((request) => (
                     <ConnectionReqCard
                       key={request?._id}
                       user={request?.fromUserId}
