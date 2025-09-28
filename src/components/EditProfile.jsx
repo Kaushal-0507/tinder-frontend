@@ -370,30 +370,21 @@ const EditProfile = () => {
 
           {/* Submit Button */}
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-end">
-            <button
-              type="submit"
-              disabled={isLoading || uploadingIndex !== null}
-              className="bg-gradient-to-r cursor-pointer from-emerald-600  to-blue-600  text-white font-medium py-2 px-4 sm:px-6 rounded-full hover:from-emerald-500  hover:to-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
-            >
-              {isLoading ? "Saving..." : "Save Changes"}
-            </button>
             <Link to="/" className="w-full sm:w-auto">
-              {!isLoading && userData?.age && (
-                <button
-                  type="button"
-                  disabled={isLoading || uploadingIndex !== null}
-                  className="w-full sm:w-auto bg-gradient-to-r cursor-pointer from-emerald-600 to-blue-600 text-white font-medium py-2 px-4 sm:px-6 rounded-full hover:from-emerald-700 hover:to-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
-                >
-                  Home
-                </button>
-              )}
+              <button
+                type="submit"
+                disabled={isLoading || uploadingIndex !== null}
+                className="bg-gradient-to-r cursor-pointer from-emerald-600  to-blue-600  text-white font-medium py-2 px-4 sm:px-6 rounded-full hover:from-emerald-500  hover:to-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
+              >
+                {isLoading ? "Saving..." : "Save Changes"}
+              </button>
             </Link>
           </div>
         </form>
       </div>
       <div className="w-full lg:w-1/3 xl:w-2/5 flex justify-center lg:justify-center">
         <div className="w-full max-w-sm">
-          <UserCard user={userData} />
+          <UserCard user={userData} flag={false} />
         </div>
       </div>
     </div>
