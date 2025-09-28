@@ -44,8 +44,10 @@ const Navbar = () => {
         {user && (
           <div className="flex gap-1 sm:gap-2 items-center">
             {user?.membershipType && (
-              <div className="font-bold text-2xl text-yellow-700">
-                {user?.membershipType}
+              <div>
+                <span className="bg-gradient-to-r mr-2 from-yellow-400 to-yellow-600 text-black px-4 py-2 rounded-[10px] text-[18px] font-bold shadow-lg">
+                  {user?.membershipType.toUpperClass()}
+                </span>
               </div>
             )}
             <div className="dropdown dropdown-end">

@@ -174,15 +174,41 @@ const PremiumPlan = () => {
   const ConfirmationPopup = () => {
     if (!currentPlan) return null;
 
-    return user.isPremium === true &&
+    const isSamePlan =
+      user.isPremium === true &&
       user.membershipType === currentPlan.name.toLowerCase() &&
-      user.membershipPeriod === billingCycle ? (
-      setTimeout(() => {
-        <div className="fixed z-50 font-bold w-full h-full text-3xl m-auto text-emerald-700">
-          You are already {user.membershipType} user
-        </div>;
-      }, 3000)
-    ) : (
+      user.membershipPeriod === billingCycle;
+
+    if (isSamePlan) {
+      // Use useEffect for the timeout functionality
+      React.useEffect(() => {
+        const timer = setTimeout(() => {
+          setShowConfirmation(false);
+          setCurrentPlan(null);
+        }, 3000);
+
+        return () => clearTimeout(timer);
+      }, []);
+
+      return (
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 backdrop-blur-sm">
+          <div className="bg-gradient-to-br from-gray-800 to-gray-900 border-2 border-emerald-500 rounded-2xl p-8 w-full max-w-md mx-4 shadow-2xl text-center">
+            <div className="text-6xl mb-4">✅</div>
+            <h3 className="text-2xl font-bold text-emerald-400 mb-4">
+              Plan Already Active
+            </h3>
+            <p className="text-gray-300 text-lg">
+              You are already on the {user.membershipType} plan
+            </p>
+            <p className="text-gray-400 mt-2">
+              This message will close automatically...
+            </p>
+          </div>
+        </div>
+      );
+    }
+
+    return (
       <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 backdrop-blur-sm">
         <div className="bg-gradient-to-br from-gray-800 to-gray-900 border-2 border-purple-500 rounded-2xl p-4 w-full max-w-md mx-4 shadow-2xl">
           {/* Header */}
