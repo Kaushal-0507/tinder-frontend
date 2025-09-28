@@ -6,7 +6,7 @@ import { addUser } from "../utils/userSlice";
 import UserCard from "./UserCard";
 import { uploadToCloudinary } from "../utils/cloudinaryUpload"; // Import the Cloudinary upload function
 import { BASE_URL } from "../utils/constant";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const EditProfile = () => {
   const userData = useSelector((store) => store.user);
@@ -14,6 +14,7 @@ const EditProfile = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [uploadingIndex, setUploadingIndex] = useState(null); // Track which image is uploading
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // Get existing photos from Redux store or empty array
   const existingPhotos = userData?.photos || [];
@@ -370,15 +371,19 @@ const EditProfile = () => {
 
           {/* Submit Button */}
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-end">
-            <Link to="/" className="w-full sm:w-auto">
-              <button
-                type="submit"
-                disabled={isLoading || uploadingIndex !== null}
-                className="bg-gradient-to-r cursor-pointer from-emerald-600  to-blue-600  text-white font-medium py-2 px-4 sm:px-6 rounded-full hover:from-emerald-500  hover:to-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
-              >
-                {isLoading ? "Saving..." : "Save Changes"}
-              </button>
-            </Link>
+            <button
+              type="submit"
+              onClick={() => {
+                handleSubmit();
+                setTimeout(() => {
+                  navigate("/");
+                }, 3000);
+              }}
+              disabled={isLoading || uploadingIndex !== null}
+              className="bg-gradient-to-r cursor-pointer from-emerald-600  to-blue-600  text-white font-medium py-2 px-4 sm:px-6 rounded-full hover:from-emerald-500  hover:to-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
+            >
+              {isLoading ? "Saving..." : "Save Changes"}
+            </button>
           </div>
         </form>
       </div>
