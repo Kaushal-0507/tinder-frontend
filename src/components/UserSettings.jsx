@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constant";
 import { useDispatch } from "react-redux";
 import { removeUser } from "../utils/userSlice";
+import { removeUserFeed } from "../utils/feedSlice";
 
 const UserSettings = () => {
   const [activePopup, setActivePopup] = useState(null);
@@ -187,12 +188,12 @@ const Popup = ({ type, onClose, setLoading, loading }) => {
 
         if (response.status === 200) {
           dispatch(removeUser());
+          dispatch(removeUserFeed());
+
           toast("Account deleted successfully", { type: "success" });
           // Redirect to login or home page after successful deletion
 
-          setTimeout(() => {
-            navigate("/login");
-          }, 2000);
+          navigate("/login");
         }
       } else if (type === "changePassword") {
         // Change password API call
