@@ -30,6 +30,19 @@ const Navbar = () => {
     }
   };
 
+  const getMembershipGradient = (membershipType) => {
+    switch (membershipType?.toLowerCase()) {
+      case "silver":
+        return "bg-gradient-to-r from-gray-400 to-gray-600 text-white";
+      case "gold":
+        return "bg-gradient-to-r from-yellow-400 to-yellow-600 text-white";
+      case "platinum":
+        return "bg-gradient-to-r from-purple-400 to-blue-600 text-white";
+      default:
+        return "bg-gradient-to-r from-gray-400 to-gray-600 text-white";
+    }
+  };
+
   return (
     <>
       <div className="navbar absolute top-0 z-50 bg-base-200 shadow-sm px-2 sm:px-4">
@@ -45,8 +58,12 @@ const Navbar = () => {
           <div className="flex gap-1 sm:gap-2 items-center">
             {user?.membershipType && (
               <div>
-                <span className="bg-gradient-to-r mr-2 from-yellow-400 to-yellow-600 text-black px-4 py-2 rounded-[10px] text-[18px] font-bold shadow-lg">
-                  {user.membershipType.toUpperCase()}
+                <span
+                  className={`mr-2 ${getMembershipGradient(
+                    user.membershipType
+                  )} px-4 py-1.5 rounded-[10px] text-[16px] font-bold shadow-lg`}
+                >
+                  {user.membershipType?.toUpperCase()}
                 </span>
               </div>
             )}
