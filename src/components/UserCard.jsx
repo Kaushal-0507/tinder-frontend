@@ -46,7 +46,11 @@ const UserCard = ({ user, flag }) => {
       </div>
 
       {/* User Info */}
-      <div className="absolute bottom-16 sm:bottom-20 left-4 sm:left-5 right-4 text-white">
+      <div
+        className={`absolute left-4 sm:left-5 right-4 text-white ${
+          flag ? "bottom-16 sm:bottom-20" : "bottom-3 sm:bottom-5"
+        }`}
+      >
         <h2 className="text-xl sm:text-2xl font-bold">
           {firstName}, <span className="font-normal">{age}</span>
         </h2>

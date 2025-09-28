@@ -1,10 +1,13 @@
 import React, { lazy, Suspense, useEffect, useState } from "react";
-import { BASE_URL, DEFAULT_USER_IMG } from "../utils/constant";
+import {
+  BASE_URL,
+  DEFAULT_USER_IMG,
+  getMembershipBorder,
+  getMembershipGradient,
+} from "../utils/constant";
 const ImageCarousel = lazy(() => import("./ImageCarousel"));
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { FaCheck, FaTimes } from "react-icons/fa";
 
 const UserProfile = () => {
   const [userDetails, setUserDetails] = useState(null);
@@ -23,17 +26,38 @@ const UserProfile = () => {
 
   if (!userDetails) return;
 
-  const { firstName, lastName, age, about, hobbies, photos, gender } =
-    userDetails;
+  const {
+    firstName,
+    lastName,
+    age,
+    about,
+    hobbies,
+    photos,
+    gender,
+    membershipType,
+  } = userDetails;
 
   // Filter out null photos
   const validPhotos = photos?.filter((photo) => photo !== null) || [];
+
+  const getMembershipSVGColor = (membershipType) => {
+    switch (membershipType?.toLowerCase()) {
+      case "silver":
+        return "text-gray-400";
+      case "gold":
+        return "text-yellow-400";
+      case "platinum":
+        return "text-emerald-400";
+      default:
+        return "text-gray-400";
+    }
+  };
 
   return (
     <div className="flex flex-col pt-20 lg:flex-row px-4 sm:px-6 lg:px-10 py-4 gap-4 lg:gap-6">
       {/* Left Side - Image Carousel */}
 
-      <div className="sm:w-1/2 lg:min-w-[320px] sm:mx-auto lg:w-auto h-120 sm:h-120 lg:h-[500px] rounded-xl overflow-hidden shadow-lg">
+      <div className="sm:w-1/2 lg:max-w-[380px] sm:mx-auto lg:w-auto h-120 sm:h-120 lg:h-[500px] rounded-xl overflow-hidden shadow-lg">
         {validPhotos.length > 0 ? (
           <Suspense fallback={<div>Loading gallery...</div>}>
             <ImageCarousel
@@ -66,7 +90,13 @@ const UserProfile = () => {
             <span className="text-lg sm:text-xl text-gray-300">
               {age} years
             </span>
-            <span className="text-xs sm:text-sm bg-purple-600 px-2 sm:px-3 py-1 rounded-full capitalize">
+            <span
+              className={`text-xs sm:text-sm ${getMembershipBorder(
+                membershipType
+              )} ${getMembershipGradient(
+                membershipType
+              )} px-2 sm:px-3 py-1 rounded-full border-2 capitalize`}
+            >
               {gender || "Not specified"}
             </span>
           </div>
@@ -76,7 +106,9 @@ const UserProfile = () => {
         <div className="space-y-2 sm:space-y-3">
           <h2 className="text-lg sm:text-xl font-semibold text-white flex items-center gap-2">
             <svg
-              className="w-4 h-4 sm:w-5 sm:h-5 text-purple-400"
+              className={`w-4 h-4 sm:w-5 sm:h-5 ${getMembershipSVGColor(
+                membershipType
+              )}`}
               fill="currentColor"
               viewBox="0 0 20 20"
             >
@@ -98,7 +130,9 @@ const UserProfile = () => {
           <div className="space-y-2 sm:space-y-3">
             <h2 className="text-lg sm:text-xl font-semibold text-white flex items-center gap-2">
               <svg
-                className="w-4 h-4 sm:w-5 sm:h-5 text-purple-400"
+                className={`w-4 h-4 sm:w-5 sm:h-5 ${getMembershipSVGColor(
+                  membershipType
+                )}`}
                 fill="currentColor"
                 viewBox="0 0 20 20"
               >
@@ -122,13 +156,21 @@ const UserProfile = () => {
         {/* Stats Section */}
         <div className="grid grid-cols-2 gap-3 sm:gap-4 pt-4 border-t border-gray-700">
           <div className="text-center p-3 sm:p-4 bg-gray-700 rounded-lg">
-            <div className="text-xl sm:text-2xl font-bold text-purple-400">
+            <div
+              className={`text-xl sm:text-2xl font-bold ${getMembershipGradient(
+                membershipType
+              )}`}
+            >
               {validPhotos.length}
             </div>
             <div className="text-xs sm:text-sm text-gray-400">Photos</div>
           </div>
           <div className="text-center p-3 sm:p-4 bg-gray-700 rounded-lg">
-            <div className="text-xl sm:text-2xl font-bold text-purple-400">
+            <div
+              className={`text-xl sm:text-2xl font-bold text-purple-400 ${getMembershipGradient(
+                membershipType
+              )}`}
+            >
               {hobbies?.length || 0}
             </div>
             <div className="text-xs sm:text-sm text-gray-400">Interests</div>

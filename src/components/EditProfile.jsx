@@ -103,7 +103,8 @@ const EditProfile = () => {
   };
 
   const validateForm = () => {
-    if (!profile.age || profile.age.trim() === "") {
+    // Convert age to string for validation, or check if it's empty/falsy
+    if (!profile.age || String(profile.age).trim() === "") {
       toast("Age is required", { type: "error" });
       return false;
     }
@@ -115,7 +116,7 @@ const EditProfile = () => {
 
     // Additional validation for age range
     const ageNum = parseInt(profile.age);
-    if (ageNum < 18 || ageNum > 100) {
+    if (isNaN(ageNum) || ageNum < 18 || ageNum > 100) {
       toast("Age must be between 18 and 100", { type: "error" });
       return false;
     }
@@ -178,7 +179,7 @@ const EditProfile = () => {
       });
       dispatch(addUser(response.data?.data));
       setTimeout(() => {
-        navigate("/");
+        navigate(`/user/profile/${userData?._id}`);
       }, 3000);
     } catch (error) {
       console.error("Error updating profile:", error);
