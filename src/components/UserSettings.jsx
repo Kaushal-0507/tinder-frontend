@@ -3,6 +3,8 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constant";
+import { useDispatch } from "react-redux";
+import { removeUser } from "../utils/userSlice";
 
 const UserSettings = () => {
   const [activePopup, setActivePopup] = useState(null);
@@ -131,7 +133,7 @@ const UserSettings = () => {
 // Separate Popup component to prevent re-renders
 const Popup = ({ type, onClose, setLoading, loading }) => {
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     oldPassword: "",
     newPassword: "",
@@ -184,6 +186,7 @@ const Popup = ({ type, onClose, setLoading, loading }) => {
         });
 
         if (response.status === 200) {
+          dispatch(removeUser());
           toast("Account deleted successfully", { type: "success" });
           // Redirect to login or home page after successful deletion
 
