@@ -102,9 +102,39 @@ const EditProfile = () => {
     setPhotos(newPhotos);
   };
 
+  const validateForm = () => {
+    if (!profile.age || profile.age.trim() === "") {
+      toast("Age is required", { type: "error" });
+      return false;
+    }
+
+    if (!profile.gender || profile.gender.trim() === "") {
+      toast("Gender is required", { type: "error" });
+      return false;
+    }
+
+    // Additional validation for age range
+    const ageNum = parseInt(profile.age);
+    if (ageNum < 18 || ageNum > 100) {
+      toast("Age must be between 18 and 100", { type: "error" });
+      return false;
+    }
+
+    return true;
+  };
+
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
+
     setError("");
+
+    // Validate form before submission
+    if (!validateForm()) {
+      return;
+    }
+
     setIsLoading(true);
 
     try {
@@ -147,6 +177,9 @@ const EditProfile = () => {
         type: "success",
       });
       dispatch(addUser(response.data?.data));
+      setTimeout(() => {
+        navigate("/");
+      }, 3000);
     } catch (error) {
       console.error("Error updating profile:", error);
       toast(error?.response?.data?.message || "Error updating profile", {
@@ -293,7 +326,7 @@ const EditProfile = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-3 sm:mt-4">
               <div>
                 <label className="block text-xs sm:text-sm font-medium text-gray-300 mb-1">
-                  Age
+                  Age *
                 </label>
                 <input
                   type="number"
@@ -304,18 +337,20 @@ const EditProfile = () => {
                   placeholder="Your age"
                   min="18"
                   max="100"
+                  required
                 />
               </div>
 
               <div>
                 <label className="block text-xs sm:text-sm font-medium text-gray-300 mb-1">
-                  Gender
+                  Gender *
                 </label>
                 <select
                   name="gender"
                   value={profile.gender}
                   onChange={handleInputChange}
                   className="w-full bg-gray-700 border border-gray-600 rounded-md py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm sm:text-base"
+                  required
                 >
                   <option value="">Select gender</option>
                   <option value="male">Male</option>
@@ -373,12 +408,6 @@ const EditProfile = () => {
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-end">
             <button
               type="submit"
-              onClick={() => {
-                handleSubmit();
-                setTimeout(() => {
-                  navigate("/");
-                }, 3000);
-              }}
               disabled={isLoading || uploadingIndex !== null}
               className="bg-gradient-to-r cursor-pointer from-emerald-600  to-blue-600  text-white font-medium py-2 px-4 sm:px-6 rounded-full hover:from-emerald-500  hover:to-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
             >
