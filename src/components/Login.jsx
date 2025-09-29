@@ -58,8 +58,8 @@ const Login = () => {
   };
   return (
     <div
-      className={`flex justify-center p-3 sm:p-5 min-h-screen items-center ${
-        isLogin ? "mt-0" : "mt-16"
+      className={`flex justify-center p-3 sm:p-5 items-center min-h-[100dvh] ${
+        isLogin ? "pt-4" : "pt-20"
       }`}
     >
       <form
