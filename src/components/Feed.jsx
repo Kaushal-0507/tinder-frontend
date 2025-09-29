@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect } from "react";
-import { BASE_URL } from "../utils/constant";
+import { BASE_URL, getMembershipGradient } from "../utils/constant";
 import { useDispatch, useSelector } from "react-redux";
 import { addUserFeed } from "../utils/feedSlice";
 import UserCard from "./UserCard";
@@ -42,7 +42,11 @@ const Feed = () => {
       </div>
 
       {feed.length <= 0 ? (
-        <div className="text-xl sm:text-2xl text-emerald-700 font-bold m-auto px-4 text-center">
+        <div
+          className={`text-xl sm:text-2xl ${getMembershipGradient(
+            loggedUser?.membershipType
+          )} font-bold m-auto px-4 text-center`}
+        >
           No New User
         </div>
       ) : (

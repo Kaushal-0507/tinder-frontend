@@ -4,10 +4,11 @@ import {
   DEFAULT_USER_IMG,
   getMembershipBorder,
   getMembershipGradient,
+  getMembershipSVGColor,
 } from "../utils/constant";
 const ImageCarousel = lazy(() => import("./ImageCarousel"));
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const UserProfile = () => {
   const [userDetails, setUserDetails] = useState(null);
@@ -40,24 +41,11 @@ const UserProfile = () => {
   // Filter out null photos
   const validPhotos = photos?.filter((photo) => photo !== null) || [];
 
-  const getMembershipSVGColor = (membershipType) => {
-    switch (membershipType?.toLowerCase()) {
-      case "silver":
-        return "text-gray-400";
-      case "gold":
-        return "text-yellow-400";
-      case "platinum":
-        return "text-emerald-400";
-      default:
-        return "text-gray-400";
-    }
-  };
-
   return (
     <div className="flex flex-col pt-20 lg:flex-row px-4 sm:px-6 lg:px-10 py-4 gap-4 lg:gap-6">
       {/* Left Side - Image Carousel */}
 
-      <div className="sm:w-1/2 lg:max-w-[380px] sm:mx-auto lg:w-auto h-120 sm:h-120 lg:h-[500px] rounded-xl overflow-hidden shadow-lg">
+      <div className="sm:w-1/2 lg:min-w-[350px] lg:max-w-[360px] sm:mx-auto lg:w-auto h-120 sm:h-120 lg:h-[500px] rounded-xl overflow-hidden shadow-lg">
         {validPhotos.length > 0 ? (
           <Suspense fallback={<div>Loading gallery...</div>}>
             <ImageCarousel
@@ -83,9 +71,22 @@ const UserProfile = () => {
       <div className="space-y-4 sm:space-y-6 w-full">
         {/* Header Section */}
         <div className="border-b border-gray-700 pb-4 sm:pb-6">
-          <h1 className="text-2xl sm:text-3xl font-bold text-white">
-            {firstName} {lastName}
-          </h1>
+          <div className="flex justify-between items-center">
+            <h1 className="text-2xl sm:text-3xl font-bold text-white">
+              {firstName} {lastName}
+            </h1>
+            <Link to="/">
+              <p
+                className={`text-xs sm:text-sm ${getMembershipBorder(
+                  membershipType
+                )} ${getMembershipGradient(
+                  membershipType
+                )} px-2 sm:px-3 py-1 font-semibold rounded-[10px] border-2 capitalize cursor-pointer hover:text-emerald-600 hover:border-emerald-600`}
+              >
+                Home
+              </p>
+            </Link>
+          </div>
           <div className="flex items-center gap-3 sm:gap-4 mt-2">
             <span className="text-lg sm:text-xl text-gray-300">
               {age} years

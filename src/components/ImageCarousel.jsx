@@ -1,5 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
+import {
+  getMembershipGradient,
+  getMembershipGradientBG,
+} from "../utils/constant";
+import { useSelector } from "react-redux";
 
 const ImageCarousel = ({
   photos: originalPhotos,
@@ -9,6 +14,7 @@ const ImageCarousel = ({
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(autoPlay);
+  const user = useSelector((store) => store.user);
   const photos = originalPhotos?.filter((photo) => photo !== null) || [];
 
   // Handle next/previous navigation
@@ -52,7 +58,7 @@ const ImageCarousel = ({
                 key={index}
                 className={`h-0.5 sm:h-1 flex-1 rounded-full transition-all duration-300 ${
                   index === currentIndex
-                    ? "bg-emerald-600"
+                    ? getMembershipGradientBG(user?.membershipType)
                     : "bg-gray-400 bg-opacity-50"
                 }`}
               />

@@ -6,13 +6,16 @@ import { addUser } from "../utils/userSlice";
 import { toast } from "react-toastify";
 
 const PremiumPlan = () => {
-  const [selectedPlan, setSelectedPlan] = useState("");
+  const user = useSelector((store) => store.user);
+
+  const [selectedPlan, setSelectedPlan] = useState(
+    user?.isPremium ? user?.membershipType?.toLowerCase() : ""
+  );
   const [billingCycle, setBillingCycle] = useState("monthly");
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [currentPlan, setCurrentPlan] = useState(null);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-  const user = useSelector((store) => store.user);
 
   const plans = {
     silver: {
@@ -304,7 +307,7 @@ const PremiumPlan = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 pt-16 lg:pt-20 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 pt-18 lg:pt-20 py-12 px-4 sm:px-6 lg:px-8">
       {/* Header Section */}
       <div className="text-center mb-16">
         <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-emerald-300 via-emerald-700 to-blue-400 bg-clip-text text-transparent mb-4">
@@ -439,7 +442,13 @@ const PremiumPlan = () => {
                   : "bg-gray-700 hover:bg-gray-600"
               } text-white shadow-lg`}
             >
-              {selectedPlan === key ? "Checkout" : `Choose ${plan.name}`}
+              {selectedPlan === key
+                ? user?.isPremium &&
+                  user?.membershipType?.toLowerCase() === key &&
+                  user?.membershipPeriod === billingCycle
+                  ? "Current Plan"
+                  : "Upgrade Required"
+                : `Choose ${plan.name}`}
             </button>
           </div>
         ))}

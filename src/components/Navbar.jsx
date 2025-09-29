@@ -13,12 +13,16 @@ import { toast } from "react-toastify";
 import { removeUserFeed } from "../utils/feedSlice";
 import { FaAngleDoubleLeft } from "react-icons/fa";
 import { toggleDashboard } from "../utils/toggleSlice";
+import { useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const location = useLocation();
+
+  const isFeed = location.pathname === "/";
 
   const handleLogout = async () => {
     try {
@@ -151,12 +155,14 @@ const Navbar = () => {
               )}
             </div>
 
-            <div
-              className="m-auto lg:hidden block p-2 hover:bg-base-300 rounded-full cursor-pointer"
-              onClick={() => dispatch(toggleDashboard())}
-            >
-              <FaAngleDoubleLeft size={18} />
-            </div>
+            {isFeed && (
+              <div
+                className="m-auto lg:hidden block p-2 hover:bg-base-300 rounded-full cursor-pointer"
+                onClick={() => dispatch(toggleDashboard())}
+              >
+                <FaAngleDoubleLeft size={18} />
+              </div>
+            )}
           </div>
         )}
       </div>

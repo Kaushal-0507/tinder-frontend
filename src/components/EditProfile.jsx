@@ -192,8 +192,8 @@ const EditProfile = () => {
   };
 
   return (
-    <div className="min-h-screen text-white p-3 sm:p-6 flex flex-col lg:flex-row gap-6">
-      <div className="w-full lg:w-2/3 xl:w-3/5">
+    <div className="min-h-screen text-white p-3 sm:p-6 ">
+      <div className="w-full lg:w-2/3 xl:w-3/5 mx-auto">
         <h1 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">
           Edit Profile
         </h1>
@@ -416,11 +416,6 @@ const EditProfile = () => {
             </button>
           </div>
         </form>
-      </div>
-      <div className="w-full lg:w-1/3 xl:w-2/5 flex justify-center lg:justify-center">
-        <div className="w-full max-w-sm">
-          <UserCard user={userData} flag={false} />
-        </div>
       </div>
     </div>
   );
