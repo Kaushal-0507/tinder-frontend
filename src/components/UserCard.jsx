@@ -21,7 +21,7 @@ const UserCard = ({ user, flag }) => {
     dispatch(removeUserFeed(_id));
   };
   return (
-    <div className="w-full max-w-sm sm:max-w-md lg:w-88 h-[85vh] sm:h-[90vh] lg:max-h-[510px] lg:h-[99%] bg-gray-900 rounded-2xl overflow-hidden shadow-xl relative border border-gray-700 mx-auto ">
+    <div className="w-full max-w-sm sm:max-w-md lg:w-88 h-[82vh] sm:h-[86vh] lg:max-h-[510px] lg:h-[99%] bg-gray-900 rounded-2xl overflow-hidden shadow-xl relative border border-gray-700 mx-auto ">
       {/* User Photo */}
       <div className="relative h-full lg:max-h-[500px] overflow-hidden mx-auto">
         {photos?.length > 0 ? (

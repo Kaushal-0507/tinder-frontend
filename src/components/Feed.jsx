@@ -50,7 +50,7 @@ const Feed = () => {
           No New User
         </div>
       ) : (
-        <div className="flex-1 sm:p-4 lg:pt-20 pt-18 flex justify-center items-center w-full">
+        <div className="flex-1 sm:p-4 lg:pt-20 pt-16 flex justify-center items-center w-full">
           {feed && <UserCard user={feed[0]} flag={true} />}
         </div>
       )}
