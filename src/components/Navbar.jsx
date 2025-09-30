@@ -54,16 +54,22 @@ const Navbar = () => {
     };
   }, []);
 
+  const goToHome = () => {
+    if (user) {
+      navigate("/");
+    } else {
+      navigate("/landingPage");
+    }
+  };
+
   return (
     <>
       <div className="navbar absolute top-0 z-50 bg-base-200 shadow-sm px-2 sm:px-4">
-        <div className="flex-1">
-          <Link
-            to="/"
-            className={`text-lg sm:text-xl md:text-2xl text-emerald-600 font-bold cursor-pointer`}
-          >
-            stumble.
-          </Link>
+        <div
+          onClick={goToHome}
+          className={`flex-1 text-lg sm:text-xl md:text-2xl text-emerald-600 font-bold cursor-pointer`}
+        >
+          stumble.
         </div>
         {user && (
           <div className="flex gap-1 sm:gap-2 items-center">

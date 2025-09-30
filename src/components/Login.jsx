@@ -58,21 +58,42 @@ const Login = () => {
   };
   return (
     <div
-      className={`flex justify-center p-3 sm:p-5 items-center min-h-[100dvh] ${
-        isLogin ? "pt-0" : "pt-20"
+      className={`flex justify-center p-3 sm:p-5 items-center h-[100dvh] ${
+        isLogin ? "mt-0" : "mt-0  "
       }`}
     >
+      {/* Background Image with Dark Overlay */}
+      <div className="absolute inset-0 top-16">
+        <img
+          src="https://i.pinimg.com/1200x/6c/22/df/6c22dfb37a9d4f04b2700c94c1eee626.jpg"
+          alt="Background"
+          className="w-full h-full object-cover opacity-50"
+        />
+        {/* Dark Vignette Effect */}
+        <div className="absolute inset-0 bg-gradient-to-t bottom-0 opacity-50 from-black/90 via-black/40 to-black/90"></div>
+        {/* Additional Radial Gradient for Center Focus */}
+        <div className="absolute inset-0 bg-radial-gradient(circle at center, transparent 0%, black 70%)"></div>
+      </div>
+
       <form
         onSubmit={handleSubmit}
-        className="bg-gray-900/80 backdrop-blur-sm p-6 sm:p-8 rounded-lg w-full max-w-sm sm:max-w-md shadow-xl border border-gray-700"
+        className={`bg-gray-900/80 backdrop-blur-sm  p-6 sm:p-8 rounded-lg w-full max-w-sm sm:max-w-md shadow-xl border border-gray-700 ${
+          isLogin ? "lg:p-8  " : "lg:py-4 lg:px-8 lg:mt-14"
+        }`}
       >
-        <h2 className="text-gray-100 text-center mb-4 sm:mb-6 text-xl sm:text-2xl font-semibold">
-          {isLogin ? "Welcome Back" : "Welcome"}
+        <h2
+          className={`text-gray-100 text-center mb-4 sm:mb-6 text-xl sm:text-2xl font-semibold ${
+            isLogin ? "lg:mb-6 " : "lg:mb-2"
+          }`}
+        >
+          {isLogin ? "Welcome Back " : "Welcome"}
         </h2>
 
         {!isLogin && (
           <>
-            <div className="mb-4 sm:mb-5">
+            <div
+              className={`mb-4 sm:mb-6  ${isLogin ? "lg:mb-6 " : "lg:mb-3"}`}
+            >
               <label className="block text-gray-400 mb-2 text-sm font-medium">
                 First Name
               </label>
@@ -84,7 +105,9 @@ const Login = () => {
                 placeholder="Enter your first name"
               />
             </div>
-            <div className="mb-4 sm:mb-5">
+            <div
+              className={`mb-4 sm:mb-6  ${isLogin ? "lg:mb-6 " : "lg:mb-3"}`}
+            >
               <label className="block text-gray-400 mb-2 text-sm font-medium">
                 Last Name
               </label>
@@ -99,7 +122,7 @@ const Login = () => {
           </>
         )}
 
-        <div className="mb-4 sm:mb-5">
+        <div className={`mb-4 sm:mb-6  ${isLogin ? "lg:mb-6 " : "lg:mb-3"}`}>
           <label className="block text-gray-400 mb-2 text-sm font-medium">
             Email
           </label>
@@ -112,7 +135,11 @@ const Login = () => {
           />
         </div>
 
-        <div className="mb-4 sm:mb-6 relative">
+        <div
+          className={`mb-4 sm:mb-6 relative ${
+            isLogin ? "lg:mb-6 " : "lg:mb-3"
+          }`}
+        >
           <label className="block text-gray-400 mb-2 text-sm font-medium">
             Password
           </label>
@@ -145,7 +172,11 @@ const Login = () => {
         >
           {isLogin ? "Sign In" : "Sign Up"}
         </button>
-        <div className="flex justify-between items-center my-3 sm:my-4 gap-2">
+        <div
+          className={`flex justify-between items-center my-3 sm:my-4 gap-2 ${
+            isLogin ? "lg:my-4 " : "lg:my-1"
+          }`}
+        >
           <p className="text-gray-400 font-semibold text-xs sm:text-sm">
             {isLogin ? "Don't have an account!" : "Already account exist!"}
           </p>

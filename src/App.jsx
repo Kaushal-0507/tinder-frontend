@@ -10,6 +10,7 @@ import Feed from "./components/Feed";
 import UserProfile from "./components/UserProfile";
 import UserSettings from "./components/UserSettings";
 import PremiumPlan from "./components/PremiumPlan";
+import LandingPage from "./components/LandingPage";
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Body />}>
             <Route path="/" element={<Feed />} />
+            <Route path="/landingPage" element={<LandingPage />} />
+
             <Route path="/login" element={<Login />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/user/profile/:userId" element={<UserProfile />} />
