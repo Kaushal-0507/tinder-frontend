@@ -3,6 +3,9 @@ export const BASE_URL =
 export const DEFAULT_USER_IMG =
   "https://tse4.mm.bing.net/th/id/OIP.TctatNGs7RN-Dfc3NZf91AAAAA?pid=Api&P=0&h=180";
 
+export const APP_BG =
+  "https://i.pinimg.com/1200x/6c/22/df/6c22dfb37a9d4f04b2700c94c1eee626.jpg";
+
 export const getMembershipGradient = (membershipType) => {
   switch (membershipType?.toLowerCase()) {
     case "silver":

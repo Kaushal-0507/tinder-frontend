@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { BASE_URL } from "../utils/constant";
+import { APP_BG, BASE_URL } from "../utils/constant";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
@@ -65,7 +65,7 @@ const Login = () => {
       {/* Background Image with Dark Overlay */}
       <div className="absolute inset-0 top-16">
         <img
-          src="https://i.pinimg.com/1200x/6c/22/df/6c22dfb37a9d4f04b2700c94c1eee626.jpg"
+          src={APP_BG}
           alt="Background"
           className="w-full h-full object-cover opacity-50"
         />
@@ -167,7 +167,7 @@ const Login = () => {
 
         <button
           type="submit"
-          className="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-2 sm:py-3 px-4 rounded font-semibold hover:from-purple-700 hover:to-blue-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-900 text-sm sm:text-base"
+          className="w-full bg-gradient-to-r from-blue-600 to-blue-300 text-white py-2 sm:py-3 px-4 rounded font-semibold hover:from-blue-700 hover:to-blue-400 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-900 text-sm sm:text-base"
           onClick={handleSubmit}
         >
           {isLogin ? "Sign In" : "Sign Up"}

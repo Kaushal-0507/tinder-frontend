@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { APP_BG } from "../utils/constant";
 
 const LandingPage = () => {
   return (
@@ -7,7 +8,7 @@ const LandingPage = () => {
       {/* Background Image with Dark Overlay */}
       <div className="absolute inset-0">
         <img
-          src="https://i.pinimg.com/1200x/6c/22/df/6c22dfb37a9d4f04b2700c94c1eee626.jpg"
+          src={APP_BG}
           alt="Background"
           className="w-full h-full object-cover opacity-50"
         />
@@ -31,7 +32,7 @@ const LandingPage = () => {
           </p>
           <Link
             to="/login"
-            className="inline-block px-8 py-3 bg-gradient-to-r from-emerald-500 to-blue-600 hover:from-emerald-600 hover:to-blue-700 rounded-full font-semibold text-lg transition-all duration-200 transform hover:scale-105 shadow-2xl"
+            className="inline-block px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-300 hover:from-blue-700 hover:to-blue-400 rounded-full font-semibold text-lg transition-all duration-200 transform hover:scale-105 shadow-2xl"
           >
             Start Your Journey
           </Link>
