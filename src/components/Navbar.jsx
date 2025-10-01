@@ -78,7 +78,7 @@ const Navbar = () => {
                 <span
                   className={`${getMembershipGradient(
                     user.membershipType
-                  )} px-4 py-1.5 rounded-[10px] text-[16px] font-bold shadow-lg`}
+                  )} px-4 py-1.5 rounded-[10px] text-[16px] font-bold `}
                 >
                   {user.membershipType?.toUpperCase()}
                 </span>

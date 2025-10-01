@@ -2,8 +2,12 @@ import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
-import { BASE_URL } from "../utils/constant";
-import { useDispatch } from "react-redux";
+import {
+  BASE_URL,
+  getMembershipBorder,
+  getMembershipRing,
+} from "../utils/constant";
+import { useDispatch, useSelector } from "react-redux";
 import { removeUser } from "../utils/userSlice";
 import { removeUserFeed } from "../utils/feedSlice";
 
@@ -133,6 +137,7 @@ const UserSettings = () => {
 
 // Separate Popup component to prevent re-renders
 const Popup = ({ type, onClose, setLoading, loading }) => {
+  const user = useSelector((store) => store.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
@@ -270,7 +275,10 @@ const Popup = ({ type, onClose, setLoading, loading }) => {
               value={formData.oldPassword}
               onChange={handleInputChange}
               placeholder="Enter your current password"
-              className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200 disabled:opacity-50"
+              className={`w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none 
+                focus:ring-1 ${getMembershipRing(
+                  user?.membershipType
+                )} transition-all duration-200 disabled:opacity-50`}
               autoFocus
               disabled={loading}
             />
@@ -291,7 +299,10 @@ const Popup = ({ type, onClose, setLoading, loading }) => {
                 value={formData.newPassword}
                 onChange={handleInputChange}
                 placeholder="Enter your new password"
-                className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200 disabled:opacity-50"
+                className={`w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none 
+                focus:ring-1 ${getMembershipRing(
+                  user?.membershipType
+                )} transition-all duration-200 disabled:opacity-50`}
                 disabled={loading}
               />
             </div>

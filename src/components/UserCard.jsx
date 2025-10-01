@@ -27,6 +27,7 @@ const UserCard = ({ user, flag }) => {
         {photos?.length > 0 ? (
           <Suspense fallback={<div>Loading gallery...</div>}>
             <ImageCarousel
+              key={_id}
               photos={photos}
               autoPlay={true}
               interval={4000} // 4 seconds between slides

@@ -13,7 +13,7 @@ export const getMembershipGradient = (membershipType) => {
     case "gold":
       return "bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent";
     case "platinum":
-      return "bg-gradient-to-r from-emerald-600 to-blue-500 bg-clip-text text-transparent";
+      return "bg-gradient-to-r from-teal-400 via-emerald-300 to-zinc-100 bg-clip-text text-transparent";
     default:
       return "bg-gradient-to-r from-emerald-400 to-gray-600 bg-clip-text text-transparent";
   }
@@ -22,13 +22,13 @@ export const getMembershipGradient = (membershipType) => {
 export const getMembershipGradientBG = (membershipType) => {
   switch (membershipType?.toLowerCase()) {
     case "silver":
-      return "bg-gradient-to-r from-gray-400 to-gray-600 ";
+      return "bg-gradient-to-r from-gray-400 to-gray-600";
     case "gold":
-      return "bg-gradient-to-r from-yellow-400 to-yellow-600 ";
+      return "bg-gradient-to-r from-yellow-400 to-yellow-600";
     case "platinum":
-      return "bg-gradient-to-r from-emerald-600 to-blue-500";
+      return "bg-gradient-to-r from-teal-400 via-emerald-300 to-zinc-100";
     default:
-      return "bg-gradient-to-r from-emerald-400 to-gray-600 ";
+      return "bg-gradient-to-r from-emerald-400 to-gray-600";
   }
 };
 
@@ -39,9 +39,22 @@ export const getMembershipBorder = (membershipType) => {
     case "gold":
       return "border-yellow-400";
     case "platinum":
-      return "border-emerald-400";
+      return "border-teal-400";
     default:
       return "border-emerald-400";
+  }
+};
+
+export const getMembershipRing = (membershipType) => {
+  switch (membershipType?.toLowerCase()) {
+    case "silver":
+      return "focus:ring-gray-400";
+    case "gold":
+      return "focus:ring-yellow-400";
+    case "platinum":
+      return "focus:ring-teal-400";
+    default:
+      return "focus:ring-gray-400";
   }
 };
 
@@ -52,7 +65,7 @@ export const getMembershipSVGColor = (membershipType) => {
     case "gold":
       return "text-yellow-400";
     case "platinum":
-      return "text-emerald-400";
+      return "text-teal-400";
     default:
       return "text-emerald-400";
   }

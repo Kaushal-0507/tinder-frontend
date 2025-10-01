@@ -5,7 +5,12 @@ import { toast } from "react-toastify";
 import { addUser } from "../utils/userSlice";
 import UserCard from "./UserCard";
 import { uploadToCloudinary } from "../utils/cloudinaryUpload"; // Import the Cloudinary upload function
-import { BASE_URL } from "../utils/constant";
+import {
+  BASE_URL,
+  getMembershipBorder,
+  getMembershipGradient,
+  getMembershipRing,
+} from "../utils/constant";
 import { Link, useNavigate } from "react-router-dom";
 
 const EditProfile = () => {
@@ -220,7 +225,11 @@ const EditProfile = () => {
                     <div className="w-full h-46 sm:h-40 bg-gray-800 rounded-lg flex items-center justify-center border border-dashed border-gray-600 hover:border-gray-400 transition-colors relative">
                       {uploadingIndex === index ? (
                         <div className="flex flex-col items-center">
-                          <div className="w-6 h-6 sm:w-8 sm:h-8 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mb-1 sm:mb-2"></div>
+                          <div
+                            className={`w-6 h-6 sm:w-8 sm:h-8 border-4 ${getMembershipBorder(
+                              userData?.membershipType
+                            )} border-t-transparent rounded-full animate-spin mb-1 sm:mb-2`}
+                          ></div>
                           <span className="text-[10px] sm:text-xs">
                             Uploading...
                           </span>
@@ -304,7 +313,9 @@ const EditProfile = () => {
                   name="firstName"
                   value={profile.firstName}
                   onChange={handleInputChange}
-                  className="w-full bg-gray-700 border border-gray-600 rounded-md py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm sm:text-base"
+                  className={`w-full bg-gray-700 border border-gray-600 rounded-md py-2 px-3 text-white focus:outline-none focus:ring-2 ${getMembershipRing(
+                    userData?.membershipType
+                  )}  text-sm sm:text-base`}
                   placeholder="Your first name"
                 />
               </div>
@@ -318,7 +329,9 @@ const EditProfile = () => {
                   name="lastName"
                   value={profile.lastName}
                   onChange={handleInputChange}
-                  className="w-full bg-gray-700 border border-gray-600 rounded-md py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm sm:text-base"
+                  className={`w-full bg-gray-700 border border-gray-600 rounded-md py-2 px-3 text-white focus:outline-none focus:ring-2 ${getMembershipRing(
+                    userData?.membershipType
+                  )}  text-sm sm:text-base`}
                   placeholder="Your last name"
                 />
               </div>
@@ -334,7 +347,9 @@ const EditProfile = () => {
                   name="age"
                   value={profile.age}
                   onChange={handleInputChange}
-                  className="w-full bg-gray-700 border border-gray-600 rounded-md py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm sm:text-base"
+                  className={`w-full bg-gray-700 border border-gray-600 rounded-md py-2 px-3 text-white focus:outline-none focus:ring-2 ${getMembershipRing(
+                    userData?.membershipType
+                  )}  text-sm sm:text-base`}
                   placeholder="Your age"
                   min="18"
                   max="100"
@@ -350,7 +365,9 @@ const EditProfile = () => {
                   name="gender"
                   value={profile.gender}
                   onChange={handleInputChange}
-                  className="w-full bg-gray-700 border border-gray-600 rounded-md py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm sm:text-base"
+                  className={`w-full bg-gray-700 border border-gray-600 rounded-md py-2 px-3 text-white focus:outline-none focus:ring-2 ${getMembershipRing(
+                    userData?.membershipType
+                  )}  text-sm sm:text-base`}
                   required
                 >
                   <option value="">Select gender</option>
@@ -376,7 +393,9 @@ const EditProfile = () => {
                 value={profile.about}
                 onChange={handleInputChange}
                 rows={3}
-                className="w-full bg-gray-700 border border-gray-600 rounded-md py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm sm:text-base"
+                className={`w-full bg-gray-700 border border-gray-600 rounded-md py-2 px-3 text-white focus:outline-none focus:ring-2 ${getMembershipRing(
+                  userData?.membershipType
+                )}  text-sm sm:text-base`}
                 placeholder="Tell others about yourself"
               />
             </div>
@@ -396,7 +415,9 @@ const EditProfile = () => {
                 value={hobbiesInput}
                 onChange={handleHobbiesChange}
                 rows={2}
-                className="w-full bg-gray-700 border border-gray-600 rounded-md py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm sm:text-base"
+                className={`w-full bg-gray-700 border border-gray-600 rounded-md py-2 px-3 text-white focus:outline-none focus:ring-2 ${getMembershipRing(
+                  userData?.membershipType
+                )}  text-sm sm:text-base`}
                 placeholder="e.g. hiking, photography, cooking"
               />
               <p className="text-[10px] sm:text-xs text-gray-400 mt-1">

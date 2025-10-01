@@ -101,7 +101,7 @@ const Login = () => {
                 type="text"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
-                className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded bg-gray-800/70 border border-gray-600 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors text-sm sm:text-base"
+                className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded bg-gray-800/70 border border-gray-600 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors text-sm sm:text-base"
                 placeholder="Enter your first name"
               />
             </div>
@@ -115,7 +115,7 @@ const Login = () => {
                 type="text"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
-                className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded bg-gray-800/70 border border-gray-600 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors text-sm sm:text-base"
+                className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded bg-gray-800/70 border border-gray-600 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors text-sm sm:text-base"
                 placeholder="Enter your last name"
               />
             </div>
@@ -130,7 +130,7 @@ const Login = () => {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded bg-gray-800/70 border border-gray-600 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors text-sm sm:text-base"
+            className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded bg-gray-800/70 border border-gray-600 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors text-sm sm:text-base"
             placeholder="Enter your email"
           />
         </div>
@@ -148,7 +148,7 @@ const Login = () => {
               type={isPwdVisible ? "text" : "password"}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-3 sm:px-4 py-2 sm:py-3 pr-10 sm:pr-12 rounded bg-gray-800/70 border border-gray-600 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors text-sm sm:text-base"
+              className="w-full px-3 sm:px-4 py-2 sm:py-3 pr-10 sm:pr-12 rounded bg-gray-800/70 border border-gray-600 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors text-sm sm:text-base"
               placeholder="Enter your password"
             />
             <button
@@ -167,7 +167,7 @@ const Login = () => {
 
         <button
           type="submit"
-          className="w-full bg-gradient-to-r from-blue-600 to-blue-300 text-white py-2 sm:py-3 px-4 rounded font-semibold hover:from-blue-700 hover:to-blue-400 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-900 text-sm sm:text-base"
+          className="w-full bg-gradient-to-r from-blue-600 to-blue-300 text-white py-2 sm:py-3 px-4 rounded font-semibold hover:from-blue-700 hover:to-blue-400 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 text-sm sm:text-base"
           onClick={handleSubmit}
         >
           {isLogin ? "Sign In" : "Sign Up"}
