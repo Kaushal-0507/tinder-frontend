@@ -5,11 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { addUserFeed } from "../utils/feedSlice";
 import UserCard from "./UserCard";
 import Dashboard from "./Dashboard";
+import ChatBox from "./ChatBox";
 
 const Feed = () => {
   const feed = useSelector((state) => state.feed);
   const loggedUser = useSelector((state) => state.user);
-  const isDashboard = useSelector((state) => state.toggle.isDashboard);
+  const { isDashboard, isChatBox } = useSelector((state) => state.toggle);
 
   const dispatch = useDispatch();
   const getUserFeed = async () => {
@@ -41,18 +42,22 @@ const Feed = () => {
         <Dashboard user={loggedUser} />
       </div>
 
-      {feed.length <= 0 ? (
-        <div
-          className={`text-xl sm:text-2xl ${getMembershipGradient(
-            loggedUser?.membershipType
-          )} font-bold m-auto px-4 text-center`}
-        >
-          No New User
-        </div>
+      {!isChatBox ? (
+        feed.length <= 0 ? (
+          <div
+            className={`text-xl sm:text-2xl ${getMembershipGradient(
+              loggedUser?.membershipType
+            )} font-bold m-auto px-4 text-center`}
+          >
+            No New User
+          </div>
+        ) : (
+          <div className="flex-1 sm:p-4 lg:pt-20 pt-16 flex justify-center items-center w-full">
+            {feed && <UserCard user={feed[0]} flag={true} />}
+          </div>
+        )
       ) : (
-        <div className="flex-1 sm:p-4 lg:pt-20 pt-16 flex justify-center items-center w-full">
-          {feed && <UserCard user={feed[0]} flag={true} />}
-        </div>
+        <ChatBox />
       )}
     </div>
   );
