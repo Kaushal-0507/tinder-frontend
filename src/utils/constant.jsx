@@ -1,5 +1,5 @@
-export const BASE_URL =
-  location.hostname === "localhost" ? "http://localhost:7000" : "/api";
+export const BASE_URL = import.meta.env.VITE_API_URL;
+
 export const DEFAULT_USER_IMG =
   "https://tse4.mm.bing.net/th/id/OIP.TctatNGs7RN-Dfc3NZf91AAAAA?pid=Api&P=0&h=180";
 
